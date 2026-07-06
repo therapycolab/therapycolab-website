@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Memberships — Therapy Colab</title>
+  <meta name="description" content="Flexible membership plans for therapists, counselors, and allied health providers. Foundation, Growth, Professional, and Clinical Partner tiers starting at $350/mo." />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/logo-icon.svg" />
+  <link rel="shortcut icon" href="assets/logo-icon.svg" />
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Preconnect for Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <style>
+    /* ── HERO ── */
+    .page-hero {
+      position: relative;
+      padding: 52px 24px;
+      background: var(--dark);
+      overflow: hidden;
+    }
+    .page-hero__bg {
+      position: absolute; inset: 0;
+      background: url('assets/hero.jpg') center/cover no-repeat;
+      opacity: 0.18;
+      pointer-events: none;
+    }
+    .page-hero__placeholder-tag {
+      position: absolute; bottom: 12px; left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.65rem; letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.3);
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .page-hero__inner {
+      position: relative;
+      max-width: 680px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .page-hero .eyebrow { color: var(--orange); }
+    .page-hero h1 { color: var(--white); margin-bottom: 16px; }
+    .page-hero__sub {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.75;
+      margin: 0;
+      font-weight: 300;
+    }
+
+    /* ── TIERS ── */
+    .tiers__intro {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+    .tiers__intro h2 { margin: 0; }
+    .tiers__intro p  { font-size: 0.9375rem; color: var(--muted); max-width: 320px; margin: 0; }
+
+    /* Most Popular badge — floating above card */
+    .membership-card { overflow: visible; }
+    .membership-card__badge {
+      display: block;
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--orange);
+      color: var(--white);
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 20px;
+      white-space: nowrap;
+      box-shadow: 0 2px 8px rgba(225,117,99,0.4);
+    }
+    .membership-card--highlight {
+      transform: scale(1.04);
+      box-shadow: 0 8px 32px rgba(92,159,153,0.3);
+      z-index: 1;
+    }
+    .membership-card--highlight:hover {
+      transform: scale(1.04) translateY(-3px);
+    }
+
+    /* ── SPACES CAROUSEL ── */
+    .spaces {
+      background: var(--bg);
+    }
+    .spaces__carousel {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 520px;
+    }
+    .spaces__photo-panel {
+      position: relative;
+      background: var(--surf);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      min-height: 420px;
+    }
+    .spaces__photo-slide {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 12px;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      pointer-events: none;
+    }
+    .spaces__photo-slide.active { opacity: 1; pointer-events: auto; }
+    .spaces__photo-img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+      position: absolute; inset: 0;
+    }
+    .spaces__photo-placeholder {
+      position: absolute;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      font-size: 0.6rem;
+      color: rgba(255,255,255,0.75);
+      letter-spacing: 0.06em;
+      text-align: center;
+      padding: 4px 12px;
+      background: rgba(37,31,26,0.55);
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .spaces__info-panel {
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 56px 5%;
+    }
+    .spaces__slide {
+      display: none;
+    }
+    .spaces__slide.active { display: block; }
+    .spaces__room-tag {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 10px;
+    }
+    .spaces__room-name {
+      font-family: var(--font-serif);
+      font-size: clamp(1.8rem, 2.5vw, 2.4rem);
+      color: var(--text);
+      margin-bottom: 16px;
+      line-height: 1.15;
+    }
+    .spaces__room-desc {
+      font-size: 0.9375rem;
+      color: var(--muted);
+      line-height: 1.85;
+      font-weight: 300;
+      margin-bottom: 28px;
+    }
+    .spaces__best-for-label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 10px;
+      display: block;
+    }
+    .spaces__best-for-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 36px;
+    }
+    .spaces__tag {
+      font-size: 0.75rem;
+      padding: 5px 12px;
+      background: rgba(92,159,153,0.1);
+      color: var(--sage);
+      border-radius: 20px;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+    }
+    .spaces__nav {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .spaces__arrow {
+      width: 36px; height: 36px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      background: transparent;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color var(--transition), background var(--transition);
+      font-size: 0.875rem;
+      color: var(--text);
+    }
+    .spaces__arrow:hover { border-color: var(--sage); color: var(--sage); background: rgba(92,159,153,0.06); }
+    .spaces__dots {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .spaces__dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--border);
+      cursor: pointer;
+      transition: background var(--transition), transform var(--transition);
+      border: none;
+      padding: 0;
+    }
+    .spaces__dot.active { background: var(--sage); transform: scale(1.4); }
+    .spaces__counter {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-left: auto;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── ADDITIONAL OPTIONS ── */
+    .options__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-top: 40px;
+    }
+    .option-item {
+      padding: 36px 32px;
+      background: var(--surf);
+      border-right: 1px solid var(--border);
+    }
+    .option-item:last-child { border-right: none; }
+    .option-item__rule {
+      display: block; width: 32px; height: 2px;
+      background: var(--sage); margin-bottom: 20px; border: none;
+    }
+    .option-item h3 { font-size: 1.05rem; margin-bottom: 8px; color: var(--text); }
+    .option-item p  { font-size: 0.9rem; color: var(--muted); line-height: 1.75; margin: 0; }
+
+    /* ── WHAT'S INCLUDED ── */
+    .included {
+      background: #ffffff;
+    }
+    .included__inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: var(--section-py) 24px;
+    }
+    .included__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+    .included__header h2 { margin: 0; }
+    .included__header p  { font-size: 0.9375rem; color: var(--muted); margin: 0; max-width: 360px; }
+    .included__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .included__item {
+      background: var(--white);
+      padding: 28px 24px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .included__check {
+      flex-shrink: 0;
+      width: 20px; height: 20px;
+      background: rgba(92,159,153,0.12);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin-top: 1px;
+    }
+    .included__check::after {
+      content: '';
+      display: block;
+      width: 8px; height: 5px;
+      border-left: 1.5px solid var(--sage);
+      border-bottom: 1.5px solid var(--sage);
+      transform: rotate(-45deg) translateY(-1px);
+    }
+    .included__item-text {
+      font-size: 0.9rem;
+      color: var(--text);
+      line-height: 1.5;
+      font-weight: 300;
+    }
+
+    /* ── GROWTH SUPPORT ── */
+    .growth__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: start;
+    }
+    .growth__body { color: var(--muted); line-height: 1.85; margin-bottom: 28px; font-weight: 300; }
+    .growth__list { display: flex; flex-direction: column; gap: 0; margin: 0; }
+    .growth__list-item {
+      display: flex; align-items: flex-start; gap: 12px;
+      font-size: 0.9rem; color: var(--text);
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .growth__list-item:last-child { border-bottom: none; }
+    .growth__list-dot {
+      flex-shrink: 0; width: 6px; height: 6px;
+      background: var(--sage); border-radius: 50%; margin-top: 6px;
+    }
+    .growth__pricing-box {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--sage);
+      border-radius: 0 8px 8px 0;
+      padding: 32px 28px;
+      margin-bottom: 28px;
+    }
+    .growth__pricing-label-head {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 20px;
+      display: block;
+    }
+    .growth__pricing-row {
+      display: flex; justify-content: space-between;
+      align-items: baseline; padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9375rem;
+    }
+    .growth__pricing-row:last-child { border-bottom: none; }
+    .growth__pricing-name  { color: var(--text); font-weight: 500; }
+    .growth__pricing-value { color: var(--sage); font-weight: 500; }
+
+    /* ── CTA ── */
+    .page-cta {
+      padding: var(--section-py) 5%;
+      background: #302C27;
+    }
+    .page-cta__inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 60px;
+      align-items: center;
+    }
+    .page-cta h2 { color: var(--white); margin-bottom: 10px; font-size: clamp(1.8rem, 3vw, 2.6rem); }
+    .page-cta__sub {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+    }
+    .page-cta__note {
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.7;
+      margin-top: 16px;
+      max-width: 480px;
+    }
+    .page-cta .btn-group {
+      flex-direction: column; min-width: 220px; gap: 12px;
+    }
+    .page-cta .btn { width: 100%; text-align: center; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .spaces__carousel { grid-template-columns: 1fr; }
+      .spaces__photo-panel { min-height: 260px; }
+      .spaces__info-panel { padding: 40px 24px; }
+      .growth__grid { grid-template-columns: 1fr; gap: 40px; }
+      .options__grid { grid-template-columns: 1fr; }
+      .option-item { border-right: none; border-bottom: 1px solid var(--border); }
+      .option-item:last-child { border-bottom: none; }
+      .included__grid { grid-template-columns: 1fr 1fr; }
+      .page-cta__inner { grid-template-columns: 1fr; gap: 32px; }
+      .page-cta .btn-group { min-width: unset; flex-direction: row; flex-wrap: wrap; }
+    }
+    @media (max-width: 600px) {
+      .included__grid { grid-template-columns: 1fr; }
+      .tiers__intro { flex-direction: column; align-items: flex-start; }
+      .membership-card--highlight { transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Custom cursor -->
+<div id="cursor-ring"></div>
+<div id="cursor-dot"></div>
+
+<!-- ============================================================
+     NAV
+     ============================================================ -->
+<header class="wf-nav" role="banner">
+  <div class="wf-nav__inner">
+    <a href="index.html" class="wf-nav__brand" aria-label="Therapy Colab — home">
+      <img class="wf-nav__logo-icon" src="assets/logo-icon.svg" alt="Therapy Colab icon" width="40" height="40" />
+      <div class="wf-nav__brand-text">
+        <span class="wf-nav__wordmark">Therapy Colab</span>
+        <span class="wf-nav__tagline">Collaborative Therapeutic Workspace</span>
+      </div>
+    </a>
+    <nav class="wf-nav__links" id="nav-links" aria-label="Primary navigation">
+      <a href="index.html">Home</a>
+      <a href="how-it-works.html">How It Works</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <div class="wf-nav__mobile-cta"><a href="https://app.acuityscheduling.com/schedule.php?owner=39277070" target="_blank" rel="noopener" class="btn btn-primary" style="display:block;text-align:center;">Book a Tour</a></div>
+    </nav>
+    <div class="wf-nav__cta">
+      <a href="https://app.acuityscheduling.com/schedule.php?owner=39277070" target="_blank" rel="noopener" class="btn btn-primary">Book a Tour</a>
+    </div>
+    <button class="wf-nav__hamburger" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+<!-- ============================================================
+     1. HERO
+     ============================================================ -->
+<section class="page-hero" aria-labelledby="hero-heading">
+  <!-- Background photo placeholder -->
+  <div class="page-hero__bg" role="presentation" aria-hidden="true"></div>
+  <span class="page-hero__placeholder-tag">[ Background — Placeholder image, room photography coming soon ]</span>
+
+  <div class="page-hero__inner">
+    <span class="eyebrow">Membership Plans</span>
+    <h1 id="hero-heading">Flexible Access for Every Stage of Practice</h1>
+    <p class="page-hero__sub">Membership is intentionally limited to maintain quality and access. Each provider is reviewed to ensure a great fit for the community.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     2. MEMBERSHIP TIERS
+     ============================================================ -->
+<section class="section" id="tiers" aria-labelledby="tiers-heading" style="background:var(--bg);">
+  <div class="section-inner">
+
+    <div class="tiers__intro">
+      <h2 id="tiers-heading">Membership Tiers</h2>
+      <p>No hidden fees. All plans include full access to the space and community.</p>
+    </div>
+
+    <div class="membership-cards" role="list">
+
+      <div class="membership-card" role="listitem">
+        <span class="membership-card__popular">&nbsp;</span>
+        <h3>Foundation</h3>
+        <p class="membership-card__hours">10 hrs / month</p>
+        <p class="membership-card__price">$350</p>
+        <p class="membership-card__price-unit">per month</p>
+        <div class="membership-card__rule"></div>
+        <p style="font-size:0.85rem;color:var(--muted);line-height:1.6;margin-bottom:20px;font-weight:300;">For clinicians building their caseload part-time. A professional space on your schedule.</p>
+        <a href="https://app.acuityscheduling.com/schedule.php?owner=39277070" target="_blank" rel="noopener" class="membership-card__link">Book a Tour →</a>
+      </div>
+
+      <div class="membership-card" role="listitem">
+        <span class="membership-card__popular">&nbsp;</span>
+        <h3>Growth</h3>
+        <p class="membership-card__hours">20 hrs / month</p>
+        <p class="membership-card__price">$680</p>
+        <p class="membership-card__price-unit">per month · Priority booking</p>
+        <div class="membership-card__rule"></div>
+        <p style="font-size:0.85rem;color:var(--muted);line-height:1.6;margin-bottom:20px;font-weight:300;">For practitioners expanding to a fuller schedule. Priority windows give you first access.</p>
+        <a href="https://app.acuityscheduling.com/schedule.php?owner=39277070" target="_blank" rel="noopener" class="membership-card__link">Book a Tour →</a>
+      </div>
+
+      <div class="membership-card membership-card--highlight" role="listitem">
+        <span class="membership-card__badge">★ Most Popular</span>
+        <span class="membership-card__popular">&nbsp;</span>
+        <h3>Professional</h3>
+        <p class="membership-card__hours">40 hrs / month</p>
+        <p class="membership-card__price">$1,280</p>
+        <p class="membership-card__price-unit">per month · Priority + Conference</p>
+        <div class="membership-card__rule"></div>
+        <p style="font-size:0.85rem;color:rgba(255,255,255,0.75);line-height:1.6;margin-bottom:20px;font-weight:300;">Full-time providers. Priority scheduling plus access to the Forum conference room.</p>
+        <a href="https://app.acuityscheduling.com/schedule.php?owner=39277070" target="_blank" rel="noopener" class="membership-card__link">Book a Tour →</a>
+      </div>
+
+      <div class="membership-card" role="listitem">
+        <span class="membership-card__popular">&nbsp;</span>
+        <h3>Clinical Partner</h3>
+        <p class="membership-card__hours">60 hrs / month</p>
+        <p class="membership-card__price">$2,100</p>
+        <p class="membership-card__price-unit">per month · Teams &amp; orgs</p>
+        <div class="membership-card__rule"></div>
+        <p style="font-size:0.85rem;color:var(--muted);line-height:1.6;margin-bottom:20px;font-weight:300;">Group practices and organizations. Multi-provider scheduling and reserved room blocks.</p>
+        <a href="https://app.acuityscheduling.com/schedule.php?owner=39277070" target="_blank" rel="noopener" class="membership-card__link">Book a Tour →</a>
+      </div>
+
+    </div>
+
+    <div class="memberships__footnote">
+      <p>Need more than 60 hours, or scheduling for a larger team? <a href="contact.html">Let's talk →</a></p>
+      <p><em>Occasional use? À la carte from $45–$60/hr — limited availability.</em></p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     3. OUR SPACES — Carousel
+     ============================================================ -->
+<section class="spaces" id="our-spaces" aria-labelledby="spaces-heading">
+
+  <div class="spaces__carousel">
+
+    <!-- Left: photo panel -->
+    <div class="spaces__photo-panel" aria-live="polite" aria-label="Room photos">
+
+      <!-- Discovery — clean assessment/office feel -->
+      <div class="spaces__photo-slide active" data-slide="0">
+        <img class="spaces__photo-img" src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80&fit=crop" alt="Discovery room placeholder" />
+        <div class="spaces__photo-placeholder">[ Placeholder — Discovery room photography coming soon ]</div>
+      </div>
+      <!-- Roundtable — cozy private office -->
+      <div class="spaces__photo-slide" data-slide="1">
+        <img class="spaces__photo-img" src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=900&q=80&fit=crop" alt="Roundtable room placeholder" />
+        <div class="spaces__photo-placeholder">[ Placeholder — Roundtable room photography coming soon ]</div>
+      </div>
+      <!-- Sandbox — bright playroom -->
+      <div class="spaces__photo-slide" data-slide="2">
+        <img class="spaces__photo-img" src="https://images.unsplash.com/photo-1555212697-194d092e3b8f?w=900&q=80&fit=crop" alt="Sandbox room placeholder" />
+        <div class="spaces__photo-placeholder">[ Placeholder — Sandbox room photography coming soon ]</div>
+      </div>
+      <!-- Commons — open collaborative space -->
+      <div class="spaces__photo-slide" data-slide="3">
+        <img class="spaces__photo-img" src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=900&q=80&fit=crop" alt="Commons room placeholder" />
+        <div class="spaces__photo-placeholder">[ Placeholder — Commons room photography coming soon ]</div>
+      </div>
+      <!-- Forum — conference / training room -->
+      <div class="spaces__photo-slide" data-slide="4">
+        <img class="spaces__photo-img" src="https://images.unsplash.com/photo-1497215842964-222b430dc094?w=900&q=80&fit=crop" alt="Forum room placeholder" />
+        <div class="spaces__photo-placeholder">[ Placeholder — Forum room photography coming soon ]</div>
+      </div>
+
+    </div>
+
+    <!-- Right: info panel -->
+    <div class="spaces__info-panel">
+
+      <h2 id="spaces-heading" style="margin-bottom:32px;">Our Spaces</h2>
+
+      <div class="spaces__slide active" data-slide="0">
+        <p class="spaces__room-tag">Assessment &amp; Evaluation</p>
+        <p class="spaces__room-name">Discovery</p>
+        <p class="spaces__room-desc">Designed for structured evaluations and assessments. Quiet, private, and fully equipped for diagnostic work requiring focus and precision.</p>
+        <span class="spaces__best-for-label">Best for</span>
+        <div class="spaces__best-for-list">
+          <span class="spaces__tag">BCBAs</span>
+          <span class="spaces__tag">Speech-Language Pathologists</span>
+          <span class="spaces__tag">Psychologists</span>
+        </div>
+      </div>
+
+      <div class="spaces__slide" data-slide="1">
+        <p class="spaces__room-tag">Private Office &amp; Small Groups</p>
+        <p class="spaces__room-name">Roundtable</p>
+        <p class="spaces__room-desc">A professional private office for 1:1 sessions, parent meetings, and small groups of up to 5–6. Versatile, comfortable, and confidential.</p>
+        <span class="spaces__best-for-label">Best for</span>
+        <div class="spaces__best-for-list">
+          <span class="spaces__tag">Therapists</span>
+          <span class="spaces__tag">Counselors</span>
+          <span class="spaces__tag">Care Coordinators</span>
+        </div>
+      </div>
+
+      <div class="spaces__slide" data-slide="2">
+        <p class="spaces__room-tag">Pediatric Play Space</p>
+        <p class="spaces__room-name">Sandbox</p>
+        <p class="spaces__room-desc">A purpose-built pediatric environment with play-based therapy materials and a child-friendly layout. Safe, engaging, and fully equipped.</p>
+        <span class="spaces__best-for-label">Best for</span>
+        <div class="spaces__best-for-list">
+          <span class="spaces__tag">Play Therapists</span>
+          <span class="spaces__tag">Occupational Therapists</span>
+          <span class="spaces__tag">Pediatric Specialists</span>
+        </div>
+      </div>
+
+      <div class="spaces__slide" data-slide="3">
+        <p class="spaces__room-tag">Social Skills &amp; Connection</p>
+        <p class="spaces__room-name">Commons</p>
+        <p class="spaces__room-desc">An open, welcoming space designed for social skills groups, workshops, and community programming. Flexible layout supports varied group sizes.</p>
+        <span class="spaces__best-for-label">Best for</span>
+        <div class="spaces__best-for-list">
+          <span class="spaces__tag">Group Facilitators</span>
+          <span class="spaces__tag">Social Workers</span>
+          <span class="spaces__tag">Training Programs</span>
+        </div>
+      </div>
+
+      <div class="spaces__slide" data-slide="4">
+        <p class="spaces__room-tag">Group Training &amp; Conference</p>
+        <p class="spaces__room-name">Forum</p>
+        <p class="spaces__room-desc">A full conference setup for training sessions, team meetings, and multi-provider collaboration. Available to Professional and Clinical Partner members.</p>
+        <span class="spaces__best-for-label">Best for</span>
+        <div class="spaces__best-for-list">
+          <span class="spaces__tag">Team Leads</span>
+          <span class="spaces__tag">Organizations</span>
+          <span class="spaces__tag">Clinical Partners</span>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <div class="spaces__nav">
+        <button class="spaces__arrow" id="spaces-prev" aria-label="Previous room">&#8592;</button>
+        <div class="spaces__dots" role="tablist" aria-label="Room navigation">
+          <button class="spaces__dot active" data-slide="0" aria-label="Discovery" role="tab" aria-selected="true"></button>
+          <button class="spaces__dot" data-slide="1" aria-label="Roundtable" role="tab" aria-selected="false"></button>
+          <button class="spaces__dot" data-slide="2" aria-label="Sandbox" role="tab" aria-selected="false"></button>
+          <button class="spaces__dot" data-slide="3" aria-label="Commons" role="tab" aria-selected="false"></button>
+          <button class="spaces__dot" data-slide="4" aria-label="Forum" role="tab" aria-selected="false"></button>
+        </div>
+        <button class="spaces__arrow" id="spaces-next" aria-label="Next room">&#8594;</button>
+        <span class="spaces__counter" id="spaces-counter">1 / 5</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     4. ADDITIONAL OPTIONS
+     ============================================================ -->
+<section class="section section--surf" aria-labelledby="options-heading">
+  <div class="section-inner">
+    <span class="eyebrow">Flexible Access</span>
+    <h2 id="options-heading">Additional Options</h2>
+    <div class="options__grid" role="list">
+      <div class="option-item" role="listitem">
+        <span class="option-item__rule" aria-hidden="true"></span>
+        <h3>Flexible Scheduling</h3>
+        <p>Book the rooms you need, when you need them — no fixed weekly cadence required.</p>
+      </div>
+      <div class="option-item" role="listitem">
+        <span class="option-item__rule" aria-hidden="true"></span>
+        <h3>Additional Hours</h3>
+        <p>Need more time in a given month? Extra hours are available on request, subject to availability.</p>
+      </div>
+      <div class="option-item" role="listitem">
+        <span class="option-item__rule" aria-hidden="true"></span>
+        <h3>À La Carte</h3>
+        <p>$45–$60/hr for occasional use. Priority scheduling is reserved for members; drop-in slots fill remaining availability.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     5. WHAT'S INCLUDED
+     ============================================================ -->
+<section class="included" aria-labelledby="included-heading">
+  <div class="included__inner">
+    <div class="included__header">
+      <div>
+        <span class="eyebrow">Every Membership</span>
+        <h2 id="included-heading">What's Included</h2>
+      </div>
+      <p>Every tier includes full access to the space, community, and everything you need to show up and do your best work.</p>
+    </div>
+    <ul class="included__grid" aria-label="Included with every membership">
+      <li class="included__item"><span class="included__check" aria-hidden="true"></span><span class="included__item-text">Professional clinical spaces</span></li>
+      <li class="included__item"><span class="included__check" aria-hidden="true"></span><span class="included__item-text">Flexible scheduling via online booking</span></li>
+      <li class="included__item"><span class="included__check" aria-hidden="true"></span><span class="included__item-text">Shared materials and common amenities</span></li>
+      <li class="included__item"><span class="included__check" aria-hidden="true"></span><span class="included__item-text">Clean, structured therapeutic environment</span></li>
+      <li class="included__item"><span class="included__check" aria-hidden="true"></span><span class="included__item-text">Private space for sessions, meetings, and interviews</span></li>
+      <li class="included__item"><span class="included__check" aria-hidden="true"></span><span class="included__item-text">Confidential setting for sensitive conversations</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============================================================
+     6. GROWTH SUPPORT
+     ============================================================ -->
+<section class="section" aria-labelledby="growth-heading" style="background:var(--bg);">
+  <div class="section-inner">
+    <div class="growth__grid">
+
+      <div>
+        <span class="eyebrow">Optional Add-On</span>
+        <h2 id="growth-heading">Growth Support</h2>
+        <p class="growth__body">Building a sustainable practice takes more than a good office. Our Growth Support offering connects you with experienced guidance on the business and operational side of clinical work — so you can focus on your clients.</p>
+        <ul class="growth__list" aria-label="Growth support topics">
+          <li class="growth__list-item"><span class="growth__list-dot" aria-hidden="true"></span>Practice setup and structure</li>
+          <li class="growth__list-item"><span class="growth__list-dot" aria-hidden="true"></span>Accreditation preparation</li>
+          <li class="growth__list-item"><span class="growth__list-dot" aria-hidden="true"></span>Community involvement &amp; boards</li>
+          <li class="growth__list-item"><span class="growth__list-dot" aria-hidden="true"></span>Connections to specialties and referral networks</li>
+          <li class="growth__list-item"><span class="growth__list-dot" aria-hidden="true"></span>Operational systems and workflows</li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="growth__pricing-box">
+          <span class="growth__pricing-label-head">Pricing</span>
+          <div class="growth__pricing-row">
+            <span class="growth__pricing-name">Members</span>
+            <span class="growth__pricing-value">First session free</span>
+          </div>
+          <div class="growth__pricing-row">
+            <span class="growth__pricing-name">Non-members</span>
+            <span class="growth__pricing-value">$150 / session</span>
+          </div>
+        </div>
+        <a href="contact.html" class="btn btn-primary">Schedule a Conversation</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     7. CTA
+     ============================================================ -->
+<section class="page-cta" id="book-tour" aria-labelledby="cta-heading">
+  <div class="page-cta__inner">
+    <div>
+      <h2 id="cta-heading">Ready to Join?</h2>
+      <p class="page-cta__sub">Membership is intentionally limited</p>
+      <p class="page-cta__note">Membership is by application — we review each provider to ensure a great fit for the community before confirming your spot.</p>
+    </div>
+    <div class="btn-group">
+      <a href="https://app.acuityscheduling.com/schedule.php?owner=39277070" target="_blank" rel="noopener" class="btn btn-primary">Book a Tour</a>
+      <a href="contact.html" class="btn btn-white">Apply for Membership</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="page-footer" role="contentinfo">
+  <div class="page-footer__inner">
+    <a href="index.html" class="page-footer__brand" aria-label="Therapy Colab — home">
+      <img class="page-footer__logo-icon" src="assets/logo-icon.svg" alt="Therapy Colab" />
+      <div class="page-footer__brand-text">
+        <span class="page-footer__wordmark">Therapy Colab</span>
+        <span class="page-footer__tagline">Collaborative Therapeutic Workspace</span>
+      </div>
+    </a>
+    <nav class="page-footer__nav" aria-label="Footer navigation">
+      <a href="memberships.html">Memberships</a>
+      <a href="how-it-works.html">How It Works</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="privacy-policy.html">Privacy Policy</a>
+    </nav>
+  </div>
+  <div class="page-footer__rule"></div>
+  <div class="page-footer__bottom">
+    <p class="page-footer__copy">&copy; <span id="footer-year">2026</span> Therapy Colab. All rights reserved.</p>
+    <div class="page-footer__social">
+      <a href="https://www.facebook.com/therapycolab" target="_blank" rel="noopener" aria-label="Therapy Colab on Facebook">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07c0 6.03 4.39 11.03 10.13 11.93v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.69.24 2.69.24v2.97h-1.52c-1.49 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8v8.44C19.61 23.1 24 18.1 24 12.07z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/therapycolab" target="_blank" rel="noopener" aria-label="Therapy Colab on Instagram">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07zM12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.31-1.46.72-2.13 1.38C1.35 2.68.94 3.35.63 4.14.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.31.79.72 1.46 1.38 2.13.67.66 1.34 1.07 2.13 1.38.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56.79-.31 1.46-.72 2.13-1.38.66-.67 1.07-1.34 1.38-2.13.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91-.31-.79-.72-1.46-1.38-2.13-.67-.66-1.34-1.07-2.13-1.38-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0z"/><path d="M12 5.84A6.16 6.16 0 1 0 18.16 12 6.16 6.16 0 0 0 12 5.84zM12 16a4 4 0 1 1 4-4 4 4 0 0 1-4 4z"/><circle cx="18.41" cy="5.59" r="1.44"/></svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ── Footer year ──
+  var fy = document.getElementById('footer-year');
+  if (fy) fy.textContent = new Date().getFullYear();
+
+  // ── Hamburger ──
+  var toggle = document.getElementById('nav-toggle');
+  var links  = document.getElementById('nav-links');
+  if (toggle && links) {
+    toggle.addEventListener('click', function() {
+      var open = links.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    document.addEventListener('click', function(e) {
+      if (!toggle.contains(e.target) && !links.contains(e.target)) {
+        links.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
+  // ── Custom cursor ──
+  var ring = document.getElementById('cursor-ring');
+  var dot  = document.getElementById('cursor-dot');
+  if (ring && dot) {
+    var mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', function(e) {
+      mx = e.clientX; my = e.clientY;
+      dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+    });
+    (function tick() {
+      rx += (mx - rx) * 0.14; ry += (my - ry) * 0.14;
+      ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+      requestAnimationFrame(tick);
+    })();
+    document.querySelectorAll('a, button, .membership-card, .space-card').forEach(function(el) {
+      el.addEventListener('mouseenter', function() { document.body.classList.add('hovering'); });
+      el.addEventListener('mouseleave', function() { document.body.classList.remove('hovering'); });
+    });
+    document.addEventListener('mousedown', function() { document.body.classList.add('clicking'); });
+    document.addEventListener('mouseup',   function() { document.body.classList.remove('clicking'); });
+  }
+
+  // ── Spaces Carousel ──
+  var current = 0;
+  var total   = 5;
+
+  var photoSlides = document.querySelectorAll('.spaces__photo-slide');
+  var infoSlides  = document.querySelectorAll('.spaces__slide');
+  var dots        = document.querySelectorAll('.spaces__dot');
+  var counter     = document.getElementById('spaces-counter');
+  var prevBtn     = document.getElementById('spaces-prev');
+  var nextBtn     = document.getElementById('spaces-next');
+
+  function goTo(n) {
+    current = (n + total) % total;
+    photoSlides.forEach(function(s) { s.classList.remove('active'); });
+    infoSlides.forEach(function(s)  { s.classList.remove('active'); });
+    dots.forEach(function(d)        { d.classList.remove('active'); d.setAttribute('aria-selected', 'false'); });
+
+    photoSlides[current].classList.add('active');
+    infoSlides[current].classList.add('active');
+    dots[current].classList.add('active');
+    dots[current].setAttribute('aria-selected', 'true');
+    if (counter) counter.textContent = (current + 1) + ' / ' + total;
+  }
+
+  if (prevBtn) prevBtn.addEventListener('click', function() { goTo(current - 1); });
+  if (nextBtn) nextBtn.addEventListener('click', function() { goTo(current + 1); });
+  dots.forEach(function(d) {
+    d.addEventListener('click', function() { goTo(parseInt(d.dataset.slide)); });
+  });
+
+  // Auto-advance every 5s, pause on hover
+  var autoTimer = setInterval(function() { goTo(current + 1); }, 5000);
+  var carousel  = document.querySelector('.spaces__carousel');
+  if (carousel) {
+    carousel.addEventListener('mouseenter', function() { clearInterval(autoTimer); });
+    carousel.addEventListener('mouseleave', function() {
+      autoTimer = setInterval(function() { goTo(current + 1); }, 5000);
+    });
+  }
+</script>
+
+</body>
+</html>

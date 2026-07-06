@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — Therapy Colab</title>
+  <meta name="description" content="Book a tour, ask about membership, or reach out to Therapy Colab with any questions. Located in Las Vegas, NV." />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/logo-icon.svg" />
+  <link rel="shortcut icon" href="assets/logo-icon.svg" />
+
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <style>
+
+    /* ── HERO ── */
+    .contact-hero {
+      background: var(--dark);
+      padding: 36px 24px;
+    }
+    .contact-hero__inner { max-width: 680px; }
+    .contact-hero .eyebrow { color: var(--orange); }
+    .contact-hero h1 { color: var(--white); margin-bottom: 12px; }
+    .contact-hero__sub {
+      font-size: 1rem; font-weight: 300;
+      color: rgba(255,255,255,0.55); line-height: 1.75; margin: 0;
+    }
+
+    /* ── CONTACT BODY ── */
+    .contact-body {
+      background: var(--white);
+      padding: var(--section-py) 24px;
+    }
+    .contact-body__inner {
+      max-width: var(--max-w); margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 64px;
+      align-items: start;
+    }
+
+    /* ── FORM PANEL ── */
+    .contact-form-panel h2 {
+      font-size: clamp(1.4rem,2.5vw,1.9rem);
+      margin-bottom: 8px;
+    }
+    .contact-form-panel__sub {
+      font-size: 0.9rem; color: var(--muted);
+      margin-bottom: 32px; font-weight: 300;
+    }
+
+    /* Form field row — name + phone side by side */
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .contact-form .btn-primary {
+      width: 100%;
+      justify-content: center;
+      padding: 14px 28px;
+      margin-top: 4px;
+    }
+    .form-note {
+      margin-top: 12px;
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    /* Netlify honeypot — hidden from humans, present for bots */
+    .contact-form__hp { display: none; }
+
+    /* Inline success state (shown by JS after a successful submit) */
+    .form-success {
+      border: 1px solid var(--sage);
+      background: rgba(92,159,153,0.08);
+      border-radius: var(--radius);
+      padding: 24px 22px;
+    }
+    .form-success__title {
+      font-family: var(--font-serif);
+      font-size: 1.15rem; color: var(--text);
+      margin: 0 0 6px;
+    }
+    .form-success__text {
+      font-size: 0.9rem; color: var(--muted);
+      font-weight: 300; line-height: 1.7; margin: 0;
+    }
+
+    /* ── INFO PANEL ── */
+    .contact-info-panel {
+      position: sticky;
+      top: 88px; /* clears the sticky nav */
+    }
+
+    .contact-info-box {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 32px 28px;
+      margin-bottom: 20px;
+    }
+    .contact-info-box h3 {
+      font-size: 1.1rem; margin-bottom: 20px;
+    }
+
+    .contact-info-item {
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .contact-info-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .contact-info-item__label {
+      font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--sage); margin-bottom: 4px;
+    }
+    .contact-info-item__value {
+      font-size: 0.9rem; color: var(--text); margin: 0; line-height: 1.5;
+    }
+    .contact-info-item__value a {
+      color: var(--text); text-decoration: none;
+      transition: color var(--transition);
+    }
+    .contact-info-item__value a:hover { color: var(--sage); }
+
+    /* Map widget */
+    .contact-map {
+      margin-top: 20px;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .contact-map iframe {
+      display: block; width: 100%; height: 200px; border: none;
+    }
+    .contact-map__link {
+      display: flex; align-items: center; justify-content: center;
+      gap: 8px;
+      padding: 10px 16px;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--sage); text-decoration: none;
+      transition: background var(--transition);
+    }
+    .contact-map__link:hover { background: var(--surf); color: var(--sage-dk); }
+
+    .contact-book-btn {
+      margin-top: 20px;
+      width: 100%;
+    }
+    .contact-book-btn .btn {
+      width: 100%; text-align: center; justify-content: center;
+    }
+
+    /* What to expect */
+    .contact-expect {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 28px;
+    }
+    .contact-expect__title {
+      font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 18px; display: block;
+    }
+    .contact-expect__step {
+      display: flex; gap: 14px;
+      align-items: flex-start;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .contact-expect__step:last-child { border-bottom: none; padding-bottom: 0; }
+    .contact-expect__num {
+      flex-shrink: 0;
+      width: 22px; height: 22px;
+      background: var(--sage); color: var(--white);
+      border-radius: 50%;
+      font-size: 0.65rem; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      margin-top: 1px;
+    }
+    .contact-expect__text {
+      font-size: 0.875rem; color: var(--muted);
+      line-height: 1.55; margin: 0;
+    }
+    .contact-expect__text strong { color: var(--text); font-weight: 500; }
+
+    /* ── FAQ STRIP ── */
+    .faq-strip {
+      background: var(--surf);
+      padding: var(--section-py) 24px;
+      border-top: 1px solid var(--border);
+    }
+    .faq-strip__inner {
+      max-width: var(--max-w); margin: 0 auto;
+    }
+    .faq-strip__header {
+      margin-bottom: 40px;
+    }
+    .faq-strip__header h2 { margin-bottom: 4px; }
+    .faq-strip__header p { font-size: 0.9375rem; color: var(--muted); margin: 0; }
+
+    .faq-grid {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .faq-item {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+    }
+    .faq-item:last-child { border-bottom: none; }
+
+    /* Remove native <details> marker */
+    .faq-item summary { list-style: none; }
+    .faq-item summary::-webkit-details-marker { display: none; }
+
+    .faq-item summary {
+      padding: 22px 28px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      color: var(--text);
+      line-height: 1.3;
+      user-select: none;
+      transition: background var(--transition), color var(--transition);
+      gap: 16px;
+    }
+    .faq-item summary:hover { background: var(--bg); }
+    .faq-item[open] summary { color: var(--sage); }
+
+    .faq-item__icon {
+      flex-shrink: 0;
+      width: 24px; height: 24px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.875rem;
+      color: var(--sage);
+      transition: transform 0.25s ease, border-color var(--transition);
+      font-style: normal;
+    }
+    .faq-item[open] .faq-item__icon {
+      transform: rotate(45deg);
+      border-color: var(--sage);
+    }
+
+    .faq-item__a {
+      padding: 0 28px 22px;
+      font-size: 0.875rem; color: var(--muted);
+      line-height: 1.8; margin: 0; font-weight: 300;
+      max-width: 680px;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .contact-body__inner { grid-template-columns: 1fr; gap: 48px; }
+      .contact-info-panel { position: static; }
+    }
+    @media (max-width: 600px) {
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Custom cursor -->
+<div id="cursor-ring"></div>
+<div id="cursor-dot"></div>
+
+<!-- ── NAV ─────────────────────────────────────────────── -->
+<header class="wf-nav" role="banner">
+  <div class="wf-nav__inner">
+    <a href="index.html" class="wf-nav__brand" aria-label="Therapy Colab — home">
+      <img class="wf-nav__logo-icon" src="assets/logo-icon.svg" alt="Therapy Colab icon" width="40" height="40" />
+      <div class="wf-nav__brand-text">
+        <span class="wf-nav__wordmark">Therapy Colab</span>
+        <span class="wf-nav__tagline">Collaborative Therapeutic Workspace</span>
+      </div>
+    </a>
+    <nav class="wf-nav__links" id="nav-links" aria-label="Primary navigation">
+      <a href="index.html">Home</a>
+      <a href="memberships.html">Memberships</a>
+      <a href="how-it-works.html">How It Works</a>
+      <a href="about.html">About</a>
+      <div class="wf-nav__mobile-cta"><a href="https://app.acuityscheduling.com/schedule.php?owner=39277070" target="_blank" rel="noopener" class="btn btn-primary" style="display:block;text-align:center;">Book a Tour</a></div>
+    </nav>
+    <div class="wf-nav__cta">
+      <a href="https://app.acuityscheduling.com/schedule.php?owner=39277070" target="_blank" rel="noopener" class="btn btn-primary">Book a Tour</a>
+    </div>
+    <button class="wf-nav__hamburger" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+<!-- ── 1. HERO ────────────────────────────────────────── -->
+<section class="contact-hero" aria-labelledby="contact-heading">
+  <div class="contact-hero__inner">
+    <span class="eyebrow">Get In Touch</span>
+    <h1 id="contact-heading">We'd Love to Hear From You</h1>
+    <p class="contact-hero__sub">Book a tour, ask about membership, or reach out with any questions. We typically respond within one business day.</p>
+  </div>
+</section>
+
+<!-- ── 2. CONTACT BODY ────────────────────────────────── -->
+<section class="contact-body" aria-label="Contact form and information">
+  <div class="contact-body__inner">
+
+    <!-- LEFT: Form -->
+    <div class="contact-form-panel">
+      <h2>Send Us a Message</h2>
+      <p class="contact-form-panel__sub">Fill out the form and we'll be in touch within one business day.</p>
+
+      <!-- Netlify Forms: detected at deploy via data-netlify. Recipient email is set in the
+           Netlify dashboard (Forms → form notifications → email notification), NOT here. The
+           hidden form-name input + honeypot are required for reliable processing. -->
+      <form class="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate aria-label="Contact form">
+        <input type="hidden" name="form-name" value="contact" />
+        <p class="contact-form__hp"><label>Don't fill this out if you're human: <input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="contact-name">Full Name</label>
+            <input class="form-input" type="text" id="contact-name" name="name"
+              placeholder="Jane Smith" required autocomplete="name" aria-required="true" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="contact-phone">Phone Number</label>
+            <input class="form-input" type="tel" id="contact-phone" name="phone"
+              placeholder="(702) 555-0100" autocomplete="tel" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="contact-email">Email Address</label>
+          <input class="form-input" type="email" id="contact-email" name="email"
+            placeholder="jane@example.com" required autocomplete="email" aria-required="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="contact-inquiry">What can we help with?</label>
+          <select class="form-select" id="contact-inquiry" name="inquiry" required aria-required="true">
+            <option value="" disabled selected>Select an inquiry type&hellip;</option>
+            <option value="book-a-tour">Book a Tour</option>
+            <option value="membership-info">Membership Info</option>
+            <option value="growth-support">Growth Support</option>
+            <option value="general-inquiry">General Inquiry</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="contact-message">Message</label>
+          <textarea class="form-textarea" id="contact-message" name="message"
+            placeholder="Tell us a bit about yourself and what you're looking for&hellip;"
+            required aria-required="true" rows="5"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Send Message</button>
+        <p class="form-note">We typically respond within one business day.</p>
+
+      </form>
+
+      <div class="form-success" id="form-success" role="status" aria-live="polite" hidden>
+        <p class="form-success__title">Thank you — your message is on its way.</p>
+        <p class="form-success__text">We'll be in touch within one business day. If it's urgent, email us at <a href="mailto:admin@therapycolab.com">admin@therapycolab.com</a>.</p>
+      </div>
+
+      <!-- What to expect — moved here to balance column heights -->
+      <div class="contact-expect" style="margin-top:24px;">
+        <span class="contact-expect__title">What to expect</span>
+        <div class="contact-expect__step">
+          <span class="contact-expect__num">1</span>
+          <p class="contact-expect__text"><strong>Tour the space</strong> — come see the rooms, meet the team, and ask your questions in person.</p>
+        </div>
+        <div class="contact-expect__step">
+          <span class="contact-expect__num">2</span>
+          <p class="contact-expect__text"><strong>Short application</strong> — we review each provider to make sure it's a good fit for the community.</p>
+        </div>
+        <div class="contact-expect__step">
+          <span class="contact-expect__num">3</span>
+          <p class="contact-expect__text"><strong>Approval &amp; onboarding</strong> — once approved, you'll receive a payment link and your booking details to start scheduling.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT: Info panel -->
+    <aside class="contact-info-panel" aria-label="Direct contact and expectations">
+
+      <!-- Direct contact box -->
+      <div class="contact-info-box">
+        <h3>Reach Us Directly</h3>
+
+        <div class="contact-info-item" id="book-tour">
+          <p class="contact-info-item__label">Book a Tour</p>
+          <p class="contact-info-item__value">Schedule directly via our booking link — no commitment required.</p>
+        </div>
+
+        <div class="contact-info-item">
+          <p class="contact-info-item__label">Address</p>
+          <p class="contact-info-item__value">7560 W. Sahara Ave, Suite 101<br>Las Vegas, NV 89117</p>
+        </div>
+
+        <div class="contact-info-item">
+          <p class="contact-info-item__label">Phone</p>
+          <p class="contact-info-item__value"><a href="tel:+17029019335">(702) 901-9335</a></p>
+        </div>
+
+        <div class="contact-info-item">
+          <p class="contact-info-item__label">Response Time</p>
+          <p class="contact-info-item__value">Within 1 business day</p>
+        </div>
+
+        <div class="contact-book-btn">
+          <a href="https://app.acuityscheduling.com/schedule.php?owner=39277070" target="_blank" rel="noopener" class="btn btn-primary">Book a Tour</a>
+        </div>
+
+        <!-- Map -->
+        <div class="contact-map">
+          <iframe
+            src="https://www.google.com/maps?q=7560+W+Sahara+Ave+Suite+101+Las+Vegas+NV+89117&output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Therapy Colab location map"
+            aria-label="Map showing Therapy Colab at 7560 W. Sahara Ave, Suite 101, Las Vegas, NV"
+          ></iframe>
+          <a
+            href="https://maps.google.com/?q=7560+W+Sahara+Ave,+Suite+101,+Las+Vegas,+NV+89117"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="contact-map__link"
+          >
+            ↗ Get Directions
+          </a>
+        </div>
+      </div>
+
+    </aside>
+
+  </div>
+</section>
+
+<!-- ── 3. FAQ STRIP ───────────────────────────────────── -->
+<section class="faq-strip" aria-labelledby="faq-heading">
+  <div class="faq-strip__inner">
+
+    <div class="faq-strip__header">
+      <span class="eyebrow">Common Questions</span>
+      <h2 id="faq-heading">Quick Answers</h2>
+      <p>Everything else you might want to know before reaching out.</p>
+    </div>
+
+    <div class="faq-grid">
+
+      <details class="faq-item">
+        <summary>Is there a long-term commitment?<span class="faq-item__icon" aria-hidden="true">+</span></summary>
+        <p class="faq-item__a">No. All memberships are month-to-month. There are no long-term leases or multi-year commitments — you scale up or down as your practice evolves.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>How long does the approval process take?<span class="faq-item__icon" aria-hidden="true">+</span></summary>
+        <p class="faq-item__a">Most providers hear back within 2–3 business days of submitting their application. We keep the process straightforward and respectful of your time.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>What if I'm not sure which plan to choose?<span class="faq-item__icon" aria-hidden="true">+</span></summary>
+        <p class="faq-item__a">Start with a tour. We'll walk you through the options based on your practice volume and goals — no pressure, just clarity. You can always adjust your tier later.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Do I need to bring my own supplies or equipment?<span class="faq-item__icon" aria-hidden="true">+</span></summary>
+        <p class="faq-item__a">No. Every room is fully furnished and equipped. Show up ready to see clients — we handle the rest. Shared materials, amenities, and high-speed Wi-Fi are included with every membership.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Can I upgrade or downgrade my membership tier?<span class="faq-item__icon" aria-hidden="true">+</span></summary>
+        <p class="faq-item__a">Yes. You can adjust your tier at any time as your practice grows or changes. Just reach out and we'll update your membership for the next billing cycle.</p>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ── FOOTER ─────────────────────────────────────────── -->
+<footer class="page-footer" role="contentinfo">
+  <div class="page-footer__inner">
+    <a href="index.html" class="page-footer__brand" aria-label="Therapy Colab — home">
+      <img class="page-footer__logo-icon" src="assets/logo-icon.svg" alt="Therapy Colab" />
+      <div class="page-footer__brand-text">
+        <span class="page-footer__wordmark">Therapy Colab</span>
+        <span class="page-footer__tagline">Collaborative Therapeutic Workspace</span>
+      </div>
+    </a>
+    <nav class="page-footer__nav" aria-label="Footer navigation">
+      <a href="memberships.html">Memberships</a>
+      <a href="how-it-works.html">How It Works</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="privacy-policy.html">Privacy Policy</a>
+    </nav>
+  </div>
+  <div class="page-footer__rule"></div>
+  <div class="page-footer__bottom">
+    <p class="page-footer__copy">&copy; <span id="footer-year">2026</span> Therapy Colab. All rights reserved.</p>
+    <div class="page-footer__social">
+      <a href="https://www.facebook.com/therapycolab" target="_blank" rel="noopener" aria-label="Therapy Colab on Facebook">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07c0 6.03 4.39 11.03 10.13 11.93v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.69.24 2.69.24v2.97h-1.52c-1.49 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8v8.44C19.61 23.1 24 18.1 24 12.07z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/therapycolab" target="_blank" rel="noopener" aria-label="Therapy Colab on Instagram">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07zM12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.31-1.46.72-2.13 1.38C1.35 2.68.94 3.35.63 4.14.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.31.79.72 1.46 1.38 2.13.67.66 1.34 1.07 2.13 1.38.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56.79-.31 1.46-.72 2.13-1.38.66-.67 1.07-1.34 1.38-2.13.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91-.31-.79-.72-1.46-1.38-2.13-.67-.66-1.34-1.07-2.13-1.38-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0z"/><path d="M12 5.84A6.16 6.16 0 1 0 18.16 12 6.16 6.16 0 0 0 12 5.84zM12 16a4 4 0 1 1 4-4 4 4 0 0 1-4 4z"/><circle cx="18.41" cy="5.59" r="1.44"/></svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  var fy = document.getElementById('footer-year');
+  if (fy) fy.textContent = new Date().getFullYear();
+
+  var toggle = document.getElementById('nav-toggle');
+  var links  = document.getElementById('nav-links');
+  if (toggle && links) {
+    toggle.addEventListener('click', function() {
+      var open = links.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    document.addEventListener('click', function(e) {
+      if (!toggle.contains(e.target) && !links.contains(e.target)) {
+        links.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
+  var ring = document.getElementById('cursor-ring');
+  var dot  = document.getElementById('cursor-dot');
+  if (ring && dot) {
+    var mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', function(e) {
+      mx = e.clientX; my = e.clientY;
+      dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+    });
+    (function tick() {
+      rx += (mx - rx) * 0.14; ry += (my - ry) * 0.14;
+      ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+      requestAnimationFrame(tick);
+    })();
+    document.querySelectorAll('a, button').forEach(function(el) {
+      el.addEventListener('mouseenter', function() { document.body.classList.add('hovering'); });
+      el.addEventListener('mouseleave', function() { document.body.classList.remove('hovering'); });
+    });
+    document.addEventListener('mousedown', function() { document.body.classList.add('clicking'); });
+    document.addEventListener('mouseup',   function() { document.body.classList.remove('clicking'); });
+  }
+
+  // ── Contact form: inline success via Netlify Forms (same-origin AJAX) ──
+  // Progressive enhancement: without JS the form posts natively to Netlify and shows
+  // Netlify's success page. With JS we POST in the background and reveal an inline
+  // confirmation; on any error we fall back to a native submit so nothing is lost.
+  var cform = document.querySelector('.contact-form');
+  var csuccess = document.getElementById('form-success');
+  if (cform && csuccess && window.fetch) {
+    cform.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!cform.checkValidity()) { cform.reportValidity(); return; }
+      var btn = cform.querySelector('button[type="submit"]');
+      if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+      var body = new URLSearchParams(new FormData(cform)).toString();
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: body
+      }).then(function (res) {
+        if (!res.ok) throw new Error('Bad response');
+        cform.hidden = true;
+        csuccess.hidden = false;
+        csuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }).catch(function () {
+        // Network/parse error — let the browser submit natively so the message still sends.
+        cform.submit();
+      });
+    });
+  }
+</script>
+
+</body>
+</html>

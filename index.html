@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home — Therapy Colab</title>
+  <meta name="description" content="Therapy Colab is a collaborative therapeutic workspace for independent providers and growing teams. Flexible memberships starting at $350/mo." />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/logo-icon.svg" />
+  <link rel="shortcut icon" href="assets/logo-icon.svg" />
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Preconnect for Google Fonts (loaded via CSS @import) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+</head>
+<body>
+
+<!-- ============================================================
+     SHARED NAV
+     ============================================================ -->
+<!-- Custom cursor -->
+<div id="cursor-ring"></div>
+<div id="cursor-dot"></div>
+
+<header class="wf-nav" role="banner">
+  <div class="wf-nav__inner">
+
+    <!-- Brand / Logo -->
+    <a href="index.html" class="wf-nav__brand" aria-label="Therapy Colab — home">
+      <img
+        class="wf-nav__logo-icon"
+        src="assets/logo-icon.svg"
+        alt="Therapy Colab icon"
+        width="40"
+        height="40"
+      />
+      <div class="wf-nav__brand-text">
+        <span class="wf-nav__wordmark">Therapy Colab</span>
+        <span class="wf-nav__tagline">Collaborative Therapeutic Workspace</span>
+      </div>
+    </a>
+
+    <!-- Desktop nav links -->
+    <nav class="wf-nav__links" id="nav-links" aria-label="Primary navigation">
+      <a href="memberships.html">Memberships</a>
+      <a href="how-it-works.html">How It Works</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <div class="wf-nav__mobile-cta"><a href="https://app.acuityscheduling.com/schedule.php?owner=39277070" target="_blank" rel="noopener" class="btn btn-primary" style="display:block;text-align:center;">Book a Tour</a></div>
+    </nav>
+
+    <!-- Desktop CTA -->
+    <div class="wf-nav__cta">
+      <a href="https://app.acuityscheduling.com/schedule.php?owner=39277070" target="_blank" rel="noopener" class="btn btn-primary">Book a Tour</a>
+    </div>
+
+    <!-- Mobile hamburger -->
+    <button
+      class="wf-nav__hamburger"
+      id="nav-toggle"
+      aria-label="Toggle navigation"
+      aria-expanded="false"
+      aria-controls="nav-links"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+  </div>
+</header>
+
+<main>
+
+<!-- ============================================================
+     1. HERO
+     ============================================================ -->
+<section class="hero" aria-labelledby="hero-heading">
+  <div class="hero__inner">
+
+    <!-- Left: content -->
+    <div class="hero__content">
+      <span class="eyebrow">Collaborative Therapeutic Workspace</span>
+      <h1 class="hero__title" id="hero-heading">
+        Start or Grow Your Practice&mdash;<em>Without the Overhead</em>
+      </h1>
+      <p class="hero__body">
+        Therapy Colab offers flexible, fully furnished office space designed specifically for
+        mental health therapists, counselors, BCBAs and ABA providers, speech-language
+        pathologists, and allied health providers. Month-to-month memberships, a supportive community, and a professional
+        environment that lets you focus on your clients&mdash;not your lease.
+      </p>
+      <div class="btn-group">
+        <a href="https://app.acuityscheduling.com/schedule.php?owner=39277070" target="_blank" rel="noopener" class="btn btn-primary">Book a Tour</a>
+        <a href="memberships.html" class="btn btn-secondary">View Memberships</a>
+      </div>
+    </div>
+
+    <!-- Right: hero photo -->
+    <div class="hero__photo">
+      <img src="assets/hero.jpg" alt="Therapy session in progress at Therapy Colab" />
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     2. ABOUT
+     ============================================================ -->
+<section class="section" aria-labelledby="about-heading">
+  <div class="section-inner">
+    <div class="about__grid">
+
+      <!-- Left: heading -->
+      <div class="about__heading">
+        <span class="eyebrow">About the Space</span>
+        <h2 id="about-heading">A Collaborative Workspace Built for Providers</h2>
+      </div>
+
+      <!-- Right: body -->
+      <div class="about__body">
+        <p>
+          Therapy Colab was created by clinicians who understood the gap between a solo home
+          practice and the cost of a traditional private office. We built a space that bridges
+          that gap&mdash;professional, warm, and designed to foster community without the
+          isolation that often comes with independent practice.
+        </p>
+        <p>
+          Every room is thoughtfully furnished for therapeutic work: sound-attenuating walls,
+          natural lighting, comfortable seating, and the privacy your clients deserve. Shared
+          amenities like a welcoming reception area, kitchenette, and high-speed Wi-Fi mean
+          you arrive ready to work&mdash;nothing more to set up.
+        </p>
+        <p>
+          Whether you're just starting out, expanding your caseload, or looking for a
+          professional home for your established practice, Therapy Colab grows with you.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     3. WHO IT'S FOR
+     ============================================================ -->
+<section class="section" aria-labelledby="who-heading">
+  <div class="section-inner">
+
+    <span class="eyebrow">Who It's For</span>
+    <h2 id="who-heading">Built for the Full Spectrum of Behavioral &amp; Allied Health</h2>
+
+    <div class="who__grid" role="list">
+
+      <div class="who__item who__item--sage who__item--featured" role="listitem">
+        <h3 class="who__item-heading">Behavior Analysts &amp; ABA Providers</h3>
+        <p class="who__item-body">
+          BCBAs and ABA providers who need professional, well-equipped rooms for
+          assessments, parent training, and one-on-one sessions&mdash;a welcoming clinical
+          space that supports behavior-analytic work and the families you serve.
+        </p>
+      </div>
+
+      <div class="who__item" role="listitem">
+        <h3 class="who__item-heading">Mental Health Therapists &amp; Counselors</h3>
+        <p class="who__item-body">
+          LCSWs, LMFTs, LPCs, and psychologists who want a professional, private office
+          without a long-term commercial lease. Ideal for solo practitioners ready to see
+          clients in person&mdash;full-time or part-time.
+        </p>
+      </div>
+
+      <div class="who__item who__item--sage" role="listitem">
+        <h3 class="who__item-heading">Speech-Language Pathologists &amp; Occupational Therapists</h3>
+        <p class="who__item-body">
+          Dedicated rooms with the space and acoustics needed for speech therapy, OT
+          evaluations, and sensory work. A professional setting that inspires confidence in
+          clients and families alike.
+        </p>
+      </div>
+
+      <div class="who__item" role="listitem">
+        <h3 class="who__item-heading">Early-Career Clinicians</h3>
+        <p class="who__item-body">
+          New to private practice? Our Foundation membership is designed to let you build
+          your caseload incrementally&mdash;with a professional address and office space
+          available when you need it, without a prohibitive upfront commitment.
+        </p>
+      </div>
+
+      <div class="who__item who__item--sage" role="listitem">
+        <h3 class="who__item-heading">Growing Therapy Teams</h3>
+        <p class="who__item-body">
+          Group practices, behavioral health startups, and multi-disciplinary teams that
+          need reliable, bookable space for multiple providers. Our Clinical Partner tier
+          scales to meet your scheduling demands.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     4. WHY THERAPY COLAB
+     ============================================================ -->
+<section class="section" aria-labelledby="why-heading">
+  <div class="section-inner">
+
+    <div class="why__intro">
+      <div>
+        <span class="eyebrow">Why Therapy Colab</span>
+        <h2 id="why-heading">Everything You Need to Run a Professional Practice</h2>
+      </div>
+      <p class="lead">
+        We've removed the friction so you can focus entirely on the work that matters.
+      </p>
+    </div>
+
+    <!-- Row 1: 3 items -->
+    <div class="why__grid">
+      <div class="why__item">
+        <p class="why__item-number">01</p>
+        <h3 class="why__item-heading">Fully Furnished &amp; Move-In Ready</h3>
+        <p class="why__item-body">
+          Every room is professionally furnished and equipped. Show up, log in, and see
+          clients&mdash;no procurement, no setup, no overhead.
+        </p>
+      </div>
+
+      <div class="why__item">
+        <p class="why__item-number">02</p>
+        <h3 class="why__item-heading">Flexible Month-to-Month Memberships</h3>
+        <p class="why__item-body">
+          No multi-year leases. Scale your hours up or down as your practice evolves.
+          Upgrade your plan whenever you're ready.
+        </p>
+      </div>
+
+      <div class="why__item">
+        <p class="why__item-number">03</p>
+        <h3 class="why__item-heading">Sound-Attenuated Private Offices</h3>
+        <p class="why__item-body">
+          Client confidentiality is non-negotiable. Our rooms are designed with sound
+          attenuation so every session stays private.
+        </p>
+      </div>
+    </div>
+
+    <!-- Row 2: 2 items -->
+    <div class="why__row-2">
+      <div class="why__item">
+        <p class="why__item-number">04</p>
+        <h3 class="why__item-heading">Online Booking &amp; Scheduling</h3>
+        <p class="why__item-body">
+          Request your sessions through our online booking. We confirm each reservation,
+          so scheduling stays simple and reliable.
+        </p>
+      </div>
+
+      <div class="why__item">
+        <p class="why__item-number">05</p>
+        <h3 class="why__item-heading">A Community of Fellow Clinicians</h3>
+        <p class="why__item-body">
+          Private practice doesn't have to mean working in isolation. Connect with peers,
+          share referrals, and build the kind of collegial environment that makes the work
+          more sustainable.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     5. FEATURE SPLIT
+     ============================================================ -->
+<section class="feature" aria-labelledby="feature-heading">
+
+  <!-- Left: photo placeholder -->
+  <div class="feature__photo" role="img" aria-label="Office interior photography coming soon">
+    <p class="feature__photo-placeholder">[ Room Photography Coming Soon ]</p>
+  </div>
+
+  <!-- Right: copy -->
+  <div class="feature__content">
+    <span class="eyebrow">Our Spaces</span>
+    <h2 id="feature-heading">A Space Designed for Professional Practice</h2>
+    <p class="feature__body">
+      Every detail of Therapy Colab is intentionally designed to support a high standard of care. Clean, fully equipped therapy spaces and private areas allow providers to operate at a higher level—whether seeing clients, interviewing staff, onboarding, or holding confidential conversations.
+    </p>
+    <a href="memberships.html#our-spaces" class="btn btn-secondary">Explore Our Spaces →</a>
+  </div>
+
+</section>
+
+<!-- ============================================================
+     6. MEMBERSHIP PLANS
+     ============================================================ -->
+<section class="section" id="memberships" aria-labelledby="memberships-heading">
+  <div class="section-inner">
+
+    <div class="memberships__intro">
+      <h2 id="memberships-heading">Membership Plans</h2>
+      <p>Flexible access designed to match how you practice. Membership is intentionally limited to maintain quality.</p>
+    </div>
+
+    <div class="membership-cards" role="list">
+
+      <div class="membership-card" role="listitem">
+        <span class="membership-card__popular">&nbsp;</span>
+        <h3>Foundation</h3>
+        <p class="membership-card__hours">10 hrs / month</p>
+        <p class="membership-card__price">$350</p>
+        <p class="membership-card__price-unit">per month</p>
+        <div class="membership-card__rule"></div>
+        <a href="memberships.html" class="membership-card__link">Learn More →</a>
+      </div>
+
+      <div class="membership-card" role="listitem">
+        <span class="membership-card__popular">&nbsp;</span>
+        <h3>Growth</h3>
+        <p class="membership-card__hours">20 hrs / month</p>
+        <p class="membership-card__price">$680</p>
+        <p class="membership-card__price-unit">per month &middot; Priority booking</p>
+        <div class="membership-card__rule"></div>
+        <a href="memberships.html" class="membership-card__link">Learn More →</a>
+      </div>
+
+      <div class="membership-card membership-card--highlight" role="listitem">
+        <span class="membership-card__popular">&#9733; Most Popular</span>
+        <h3>Professional</h3>
+        <p class="membership-card__hours">40 hrs / month</p>
+        <p class="membership-card__price">$1,280</p>
+        <p class="membership-card__price-unit">per month &middot; Priority + Conference</p>
+        <div class="membership-card__rule"></div>
+        <a href="memberships.html" class="membership-card__link">Learn More →</a>
+      </div>
+
+      <div class="membership-card" role="listitem">
+        <span class="membership-card__popular">&nbsp;</span>
+        <h3>Clinical Partner</h3>
+        <p class="membership-card__hours">60 hrs / month</p>
+        <p class="membership-card__price">$2,100</p>
+        <p class="membership-card__price-unit">per month &middot; Teams &amp; orgs</p>
+        <div class="membership-card__rule"></div>
+        <a href="memberships.html" class="membership-card__link">Learn More →</a>
+      </div>
+
+    </div>
+
+    <!-- Footnotes -->
+    <div class="memberships__footnote">
+      <p>
+        Need more than 60 hours, or scheduling for a larger team?
+        <a href="contact.html">Let's talk &rarr;</a>
+      </p>
+      <p>
+        <em>Occasional use? &Agrave; la carte from $45&ndash;$60/hr &mdash; limited availability.</em>
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     7. STAY IN THE LOOP (Mailchimp waitlist)
+     ============================================================ -->
+<section class="section section--surf" id="stay-in-the-loop" aria-labelledby="waitlist-heading">
+  <div class="waitlist__inner">
+
+    <div class="waitlist__left">
+      <span class="eyebrow">Not Ready to Tour Yet?</span>
+      <h2 id="waitlist-heading">Stay in the Loop</h2>
+      <p>Not ready to tour? Stay in the loop and we'll let you know when spots open.</p>
+    </div>
+
+    <div class="waitlist__right">
+      <!-- Mailchimp waitlist (audience: Therapy Colab) — email-only, native styling -->
+      <form class="waitlist-form" action="https://autismnevada.us15.list-manage.com/subscribe/post?u=d5837d99549b764d4dc52ed1f&amp;id=becbca6d32&amp;f_id=005a8fe0f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank" aria-label="Email waitlist signup">
+        <label for="waitlist-email" class="sr-only">Email address</label>
+        <input type="email" id="waitlist-email" name="EMAIL" placeholder="your@email.com" required autocomplete="email" />
+        <!-- Mailchimp anti-bot honeypot — do not remove -->
+        <div aria-hidden="true" style="position:absolute;left:-5000px;"><input type="text" name="b_d5837d99549b764d4dc52ed1f_becbca6d32" tabindex="-1" value="" /></div>
+        <button type="submit" name="subscribe" class="btn btn-primary">Notify Me</button>
+      </form>
+      <p class="waitlist__note">We'll only email you when spaces open. Unsubscribe anytime.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     8. FINAL CTA
+     ============================================================ -->
+<section class="final-cta" id="book-tour" aria-labelledby="cta-heading">
+  <div class="final-cta__inner">
+    <div>
+      <h2 id="cta-heading">Now Accepting<br>New Members</h2>
+      <p class="final-cta__sub">Membership is intentionally limited</p>
+    </div>
+    <div class="btn-group">
+      <a href="https://app.acuityscheduling.com/schedule.php?owner=39277070" target="_blank" rel="noopener" class="btn btn-primary">Book a Tour</a>
+      <a href="contact.html" class="btn btn-white">Apply for Membership</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================================================
+     SHARED FOOTER
+     ============================================================ -->
+<footer class="page-footer" role="contentinfo">
+  <div class="page-footer__inner">
+
+    <!-- Brand -->
+    <a href="index.html" class="page-footer__brand" aria-label="Therapy Colab — home">
+      <img class="page-footer__logo-icon" src="assets/logo-icon.svg" alt="Therapy Colab" />
+      <div class="page-footer__brand-text">
+        <span class="page-footer__wordmark">Therapy Colab</span>
+        <span class="page-footer__tagline">Collaborative Therapeutic Workspace</span>
+      </div>
+    </a>
+
+    <!-- Footer nav -->
+    <nav class="page-footer__nav" aria-label="Footer navigation">
+      <a href="memberships.html">Memberships</a>
+      <a href="how-it-works.html">How It Works</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="privacy-policy.html">Privacy Policy</a>
+    </nav>
+
+  </div>
+
+  <div class="page-footer__rule"></div>
+
+  <div class="page-footer__bottom">
+    <p class="page-footer__copy">&copy; <span id="footer-year">2026</span> Therapy Colab. All rights reserved.</p>
+    <div class="page-footer__social">
+      <a href="https://www.facebook.com/therapycolab" target="_blank" rel="noopener" aria-label="Therapy Colab on Facebook">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07c0 6.03 4.39 11.03 10.13 11.93v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.69.24 2.69.24v2.97h-1.52c-1.49 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8v8.44C19.61 23.1 24 18.1 24 12.07z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/therapycolab" target="_blank" rel="noopener" aria-label="Therapy Colab on Instagram">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07zM12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.31-1.46.72-2.13 1.38C1.35 2.68.94 3.35.63 4.14.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.31.79.72 1.46 1.38 2.13.67.66 1.34 1.07 2.13 1.38.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56.79-.31 1.46-.72 2.13-1.38.66-.67 1.07-1.34 1.38-2.13.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91-.31-.79-.72-1.46-1.38-2.13-.67-.66-1.34-1.07-2.13-1.38-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0z"/><path d="M12 5.84A6.16 6.16 0 1 0 18.16 12 6.16 6.16 0 0 0 12 5.84zM12 16a4 4 0 1 1 4-4 4 4 0 0 1-4 4z"/><circle cx="18.41" cy="5.59" r="1.44"/></svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ── Footer year ──
+  var fy = document.getElementById('footer-year');
+  if (fy) fy.textContent = new Date().getFullYear();
+
+  // ── Hamburger ──
+  var toggle = document.getElementById('nav-toggle');
+  var links  = document.getElementById('nav-links');
+  if (toggle && links) {
+    toggle.addEventListener('click', function() {
+      var open = links.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    document.addEventListener('click', function(e) {
+      if (!toggle.contains(e.target) && !links.contains(e.target)) {
+        links.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
+  // ── Custom cursor ──
+  var ring = document.getElementById('cursor-ring');
+  var dot  = document.getElementById('cursor-dot');
+  if (ring && dot) {
+    var mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', function(e) {
+      mx = e.clientX; my = e.clientY;
+      dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+    });
+    (function tick() {
+      rx += (mx - rx) * 0.14; ry += (my - ry) * 0.14;
+      ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+      requestAnimationFrame(tick);
+    })();
+    document.querySelectorAll('a, button, .membership-card').forEach(function(el) {
+      el.addEventListener('mouseenter', function() { document.body.classList.add('hovering'); });
+      el.addEventListener('mouseleave', function() { document.body.classList.remove('hovering'); });
+    });
+    document.addEventListener('mousedown', function() { document.body.classList.add('clicking'); });
+    document.addEventListener('mouseup',   function() { document.body.classList.remove('clicking'); });
+  }
+</script>
+
+</body>
+</html>

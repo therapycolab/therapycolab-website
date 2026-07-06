@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Therapy Colab</title>
+  <meta name="description" content="Learn the story behind Therapy Colab — built from over two decades of experience in the therapy community to give independent providers the professional space they deserve." />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/logo-icon.svg" />
+  <link rel="shortcut icon" href="assets/logo-icon.svg" />
+
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <style>
+
+    /* ── HERO ── */
+    .about-hero {
+      background: var(--dark);
+      padding: 28px 24px;
+    }
+    .about-hero__inner { max-width: 760px; margin: 0 auto; }
+    .about-hero .eyebrow { color: var(--orange); }
+    .about-hero h1 { color: var(--white); margin-bottom: 16px; }
+    .about-hero__body {
+      font-size: 1rem; font-weight: 300;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.85; margin: 0;
+    }
+
+    /* ── STATS BAR ── */
+    .stats-bar { background: var(--sage); padding: 16px 24px; }
+    .stats-bar__inner {
+      max-width: var(--max-w); margin: 0 auto;
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 0;
+    }
+    .stat {
+      text-align: center; padding: 14px 32px;
+      border-right: 1px solid rgba(255,255,255,0.25);
+    }
+    .stat:last-child { border-right: none; }
+    .stat__number {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem,3.5vw,2.8rem);
+      color: var(--white); line-height: 1; margin-bottom: 6px;
+    }
+    .stat__label {
+      font-size: 0.8rem; font-weight: 500;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      color: rgba(255,255,255,0.8); line-height: 1.4;
+    }
+
+    /* ── STORY ── */
+    .story-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 48px; align-items: center;
+    }
+    .story-photo {
+      position: relative;
+      border-radius: var(--radius);
+      aspect-ratio: 16/10;
+      overflow: hidden;
+      background: var(--surf);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .story-photo img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .story-photo__tag {
+      position: absolute; bottom: 10px; left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.6rem; letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.8); text-transform: uppercase;
+      background: rgba(37,31,26,0.5); padding: 3px 10px;
+      border-radius: 20px; white-space: nowrap;
+    }
+    .story-content p { color: var(--muted); line-height: 1.85; font-weight: 300; }
+    .story-content h2 { margin-bottom: 20px; }
+
+    /* ── MEET THE TEAM CAROUSEL ── */
+    .team { background: var(--surf); }
+    .team__header {
+      max-width: var(--max-w); margin: 0 auto;
+      padding: var(--section-py) 24px 0;
+      display: flex; align-items: flex-end;
+      justify-content: space-between; flex-wrap: wrap; gap: 16px;
+      padding-bottom: 40px;
+    }
+    .team__header h2 { margin: 0; }
+    .team__header p { font-size: 0.9375rem; color: var(--muted); margin: 0; max-width: 360px; }
+
+    .team__carousel {
+      max-width: var(--max-w); margin: 0 auto;
+      padding: 0 24px var(--section-py);
+      position: relative;
+    }
+
+    .team__slide { display: none; }
+    .team__slide.active { display: grid; grid-template-columns: 280px 1fr; gap: 56px; align-items: start; }
+
+    .team__photo-wrap {
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+      aspect-ratio: 3/4;
+      background: var(--border);
+      flex-shrink: 0;
+    }
+    .team__photo-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+    .team__photo-tag {
+      position: absolute; bottom: 8px; left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.55rem; letter-spacing: 0.08em; text-transform: uppercase;
+      color: rgba(255,255,255,0.8);
+      background: rgba(37,31,26,0.5); padding: 3px 10px;
+      border-radius: 20px; white-space: nowrap;
+    }
+
+    .team__info { display: flex; flex-direction: column; justify-content: center; }
+    .team__name {
+      font-family: var(--font-serif);
+      font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+      color: var(--text); margin-bottom: 4px;
+    }
+    .team__title {
+      font-size: 0.75rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--sage); margin-bottom: 24px;
+    }
+    .team__bio {
+      font-size: 0.9375rem; color: var(--muted);
+      line-height: 1.85; font-weight: 300; margin-bottom: 28px;
+    }
+    /* Collapsible founder bio — progressive enhancement: full bio shows by
+       default; JS adds .is-collapsed to keep the card compact, toggled by "Read more". */
+    .team__bio-wrap {
+      position: relative;
+      transition: max-height 0.5s ease;
+    }
+    .team__bio-wrap.is-collapsed {
+      max-height: 9.5em;
+      overflow: hidden;
+    }
+    .team__bio-wrap.is-collapsed::after {
+      content: '';
+      position: absolute; left: 0; right: 0; bottom: 0;
+      height: 4.5em; pointer-events: none;
+      background: linear-gradient(to bottom, rgba(234,226,214,0), var(--surf));
+    }
+    .team__bio-toggle {
+      align-self: flex-start;
+      margin: 2px 0 28px; padding: 0;
+      background: none; border: none; cursor: pointer;
+      font-family: var(--font-sans);
+      font-size: 0.6875rem; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--sage);
+      transition: color var(--transition);
+    }
+    .team__bio-toggle:hover { color: var(--sage-dk); }
+    .team__quote {
+      border-left: 3px solid var(--sage);
+      padding-left: 20px; margin-bottom: 28px;
+    }
+    .team__quote p {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 1.05rem; color: var(--text);
+      line-height: 1.65; margin: 0;
+    }
+
+
+    /* ── TESTIMONIALS ── */
+    .testimonials { background: var(--bg); }
+    .testimonials__inner {
+      max-width: var(--max-w); margin: 0 auto;
+      padding: var(--section-py) 24px;
+    }
+    .testimonials__header { margin-bottom: 36px; }
+    .testimonials__header h2 { margin-bottom: 8px; }
+    .testimonials__grid {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 20px;
+    }
+    .testimonial-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px 22px;
+      display: flex; flex-direction: column; gap: 14px;
+      transition: box-shadow var(--transition);
+    }
+    .testimonial-card:hover { box-shadow: var(--shadow-lg); }
+    .testimonial-card__quote-mark {
+      font-family: var(--font-serif);
+      font-size: 2.75rem; color: var(--sage);
+      line-height: 0.7; opacity: 0.4;
+      margin-bottom: -10px;
+    }
+    .testimonial-card__text {
+      font-size: 0.875rem; color: var(--text);
+      line-height: 1.65; font-style: italic;
+      font-weight: 300; flex: 1;
+    }
+    .testimonial-card__divider {
+      height: 1px; background: var(--border);
+    }
+    .testimonial-card__name {
+      font-size: 0.875rem; font-weight: 500; color: var(--text);
+      margin-bottom: 2px;
+    }
+    .testimonial-card__credential {
+      font-size: 0.75rem; color: var(--sage);
+      letter-spacing: 0.06em; text-transform: uppercase;
+    }
+
+    /* ── CTA ── */
+    .about-cta {
+      padding: var(--section-py) 5%;
+      background: #302C27;
+    }
+    .about-cta__inner {
+      max-width: var(--max-w); margin: 0 auto;
+      display: grid; grid-template-columns: 1fr auto;
+      gap: 60px; align-items: center;
+    }
+    .about-cta h2 { color: var(--white); margin-bottom: 10px; font-size: clamp(1.8rem,3vw,2.6rem); }
+    .about-cta__sub {
+      font-size: 0.6875rem; letter-spacing: 0.18em;
+      text-transform: uppercase; color: rgba(255,255,255,0.35);
+    }
+    .about-cta .btn-group { flex-direction: column; min-width: 200px; gap: 12px; }
+    .about-cta .btn { width: 100%; text-align: center; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .stats-bar__inner { grid-template-columns: repeat(3,1fr); }
+      .story-grid { grid-template-columns: 1fr; gap: 40px; }
+      .team__slide.active { grid-template-columns: 1fr; gap: 32px; }
+      .team__photo-wrap { max-width: 280px; }
+      .testimonials__grid { grid-template-columns: 1fr 1fr; }
+      .about-cta__inner { grid-template-columns: 1fr; gap: 32px; }
+      .about-cta .btn-group { min-width: unset; flex-direction: row; flex-wrap: wrap; }
+    }
+    @media (max-width: 600px) {
+      .stats-bar__inner { grid-template-columns: 1fr; }
+      .stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.25); padding: 28px 24px; }
+      .stat:last-child { border-bottom: none; }
+      .testimonials__grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Custom cursor -->
+<div id="cursor-ring"></div>
+<div id="cursor-dot"></div>
+
+<!-- ── NAV ───────────────────────────────────────────────── -->
+<header class="wf-nav" role="banner">
+  <div class="wf-nav__inner">
+    <a href="index.html" class="wf-nav__brand" aria-label="Therapy Colab — home">
+      <img class="wf-nav__logo-icon" src="assets/logo-icon.svg" alt="Therapy Colab icon" width="40" height="40" />
+      <div class="wf-nav__brand-text">
+        <span class="wf-nav__wordmark">Therapy Colab</span>
+        <span class="wf-nav__tagline">Collaborative Therapeutic Workspace</span>
+      </div>
+    </a>
+    <nav class="wf-nav__links" id="nav-links" aria-label="Primary navigation">
+      <a href="index.html">Home</a>
+      <a href="memberships.html">Memberships</a>
+      <a href="how-it-works.html">How It Works</a>
+      <a href="contact.html">Contact</a>
+      <div class="wf-nav__mobile-cta"><a href="https://app.acuityscheduling.com/schedule.php?owner=39277070" target="_blank" rel="noopener" class="btn btn-primary" style="display:block;text-align:center;">Book a Tour</a></div>
+    </nav>
+    <div class="wf-nav__cta">
+      <a href="https://app.acuityscheduling.com/schedule.php?owner=39277070" target="_blank" rel="noopener" class="btn btn-primary">Book a Tour</a>
+    </div>
+    <button class="wf-nav__hamburger" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+<!-- ── 1. HERO ────────────────────────────────────────────── -->
+<section class="about-hero" aria-labelledby="about-heading">
+  <div class="about-hero__inner">
+    <span class="eyebrow">Our Story</span>
+    <h1 id="about-heading">Built by Experience.<br>Designed for Growth.</h1>
+    <p class="about-hero__body">Therapy Colab was created to solve a problem every independent provider knows — the lack of flexible, professional space that meets the standards of serious clinical practice.</p>
+  </div>
+</section>
+
+<!-- ── 2. STATS BAR ───────────────────────────────────────── -->
+<div class="stats-bar" role="region" aria-label="At a glance">
+  <div class="stats-bar__inner">
+    <div class="stat">
+      <p class="stat__number">13</p>
+      <p class="stat__label">Years of Business Ownership</p>
+    </div>
+    <div class="stat">
+      <p class="stat__number">29</p>
+      <p class="stat__label">Years in the Therapy Community</p>
+    </div>
+    <div class="stat">
+      <p class="stat__number">1</p>
+      <p class="stat__label">Space Built for Providers Like You</p>
+    </div>
+  </div>
+</div>
+
+<!-- ── 3. STORY ───────────────────────────────────────────── -->
+<section class="section" style="background:var(--white);padding-top:40px;padding-bottom:40px;" aria-labelledby="story-heading">
+  <div class="section-inner">
+    <div class="story-grid">
+
+      <div class="story-photo">
+        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80&fit=crop" alt="Therapy Colab space — placeholder" />
+        <span class="story-photo__tag">[ Placeholder — room photography coming soon ]</span>
+      </div>
+
+      <div class="story-content">
+        <span class="eyebrow">The Vision</span>
+        <h2 id="story-heading">A Space Built Around Your Practice</h2>
+        <p>Therapy Colab was built from lived experience — over two decades working in and around therapeutic practice. Every detail of the space, the membership structure, and the community reflects what providers actually need: professional space without the long-term commitment, and a community of peers who understand the work.</p>
+        <p style="margin-top:16px;">Every provider who walks through our doors deserves a space that reflects the quality of their work — and the ambition of where they're going.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── 4. MEET THE TEAM ───────────────────────────────────── -->
+<section class="team" aria-labelledby="team-heading">
+
+  <div class="team__header">
+    <div>
+      <span class="eyebrow">The People</span>
+      <h2 id="team-heading">Meet the Team</h2>
+    </div>
+    <p>The people behind Therapy Colab — experienced, community-driven, and built to support yours.</p>
+  </div>
+
+  <div class="team__carousel">
+
+    <!-- Slide 1: Veronica -->
+    <div class="team__slide active" data-slide="0">
+      <div class="team__photo-wrap">
+        <img src="assets/vsmith-headshot.png" alt="Veronica Smith, Founder of Therapy Colab" />
+      </div>
+      <div class="team__info">
+        <h3 class="team__name">Veronica Smith, M.Ed., BCBA, LBA</h3>
+        <p class="team__title">Founder, Therapy Colab</p>
+        <div class="team__bio-wrap" id="bio-veronica">
+        <p class="team__bio">Veronica Smith is a Board Certified Behavior Analyst and a Licensed Behavior Analyst in NV, with a Master of Education and the founder of Therapy Colab. She is also the founder of Autism &amp; Behavioral Consulting Services, the first clinic in Southern Nevada to earn accreditation from the Autism Commission on Quality (ACQ). As one of the first Spanish speaking behavior analysts in Nevada, and one of the first providers in the state to accept Medicaid for these services, she has long worked to expand access to quality care for the families who need it most. She serves families in both English and Spanish, and is a member of the Nevada Association for Behavior Analysis, where she has held a board leadership role, and of the Council of Autism Service Providers (CASP), among other professional organizations dedicated to advancing the field.</p>
+        <p class="team__bio">Veronica's career began nearly three decades ago in a military child care program serving children of all abilities, where she worked alongside therapeutic teams, an experience that shaped her belief in collaborative care long before she became a behavior analyst. Veronica has called Las Vegas home since 2000, when her husband's Air Force career brought the family to Nellis Air Force Base following a three year tour in Aviano, Italy. Over more than 29 years in the therapy community and over 14 years as a business owner, she has seen firsthand how hard it can be for independent clinicians to find professional space that fits the way they actually work. She built her own practice from the ground up, and she created Therapy Colab to give other providers the warm, fully equipped, flexible environment she wished existed when she was starting out.</p>
+        <p class="team__bio">Her vision is simple: remove the overhead, the long leases, and the isolation, so therapists, behavior analysts, and allied health providers can focus on what matters most, their clients. An active member of the Latin Chamber of Commerce and a proud mother of two daughters and grandmother to one grandson, Veronica is deeply rooted in the Las Vegas community. Therapy Colab brings together everything she values as a clinician and an owner: professionalism, community, and room to grow.</p>
+        </div>
+        <button type="button" class="team__bio-toggle" aria-expanded="false" aria-controls="bio-veronica" hidden>Read more</button>
+        <blockquote class="team__quote">
+          <p>"I care about access and about community. Therapy Colab is my way of bringing providers together so more families get the care they deserve."</p>
+        </blockquote>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── 5. TESTIMONIALS ────────────────────────────────────── -->
+<section class="testimonials" aria-labelledby="testimonials-heading">
+  <div class="testimonials__inner">
+
+    <div class="testimonials__header">
+      <span class="eyebrow">From Our Members</span>
+      <h2 id="testimonials-heading">What Providers Are Saying</h2>
+    </div>
+
+    <div class="testimonials__grid">
+
+      <div class="testimonial-card">
+        <div class="testimonial-card__quote-mark">"</div>
+        <p class="testimonial-card__text">Therapy Colab provides a unique model and space for multidisciplinary teams to coordinate and deliver high quality care and collaboration for the clients and families they serve. Veronica Smith, founder of Therapy Colab, is a remarkable pioneer and leader in the ABA field, who offers this innovative opportunity for providers and clients alike to share and embrace this valued approach.</p>
+        <div class="testimonial-card__divider"></div>
+        <div>
+          <p class="testimonial-card__name">Adam Volker, EdD, BCBA, LBA</p>
+          <p class="testimonial-card__credential">Behavior Analyst</p>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-card__quote-mark">"</div>
+        <p class="testimonial-card__text">As someone who works closely with children and families, I see firsthand how much our community could benefit from a collaborative ABA center. Right now, families often feel like they're piecing together a puzzle with half the pieces missing. A shared space where therapists, families, and community partners can work together would create stronger support systems, better outcomes, and more opportunities for meaningful social connections. Plus, it would save everyone from having to reinvent the wheel every time a new challenge pops up, because if there's one thing ABA professionals don't need, it's another data sheet trying to solve world peace!</p>
+        <div class="testimonial-card__divider"></div>
+        <div>
+          <p class="testimonial-card__name">Tanisha Porter, BCBA, LBA</p>
+          <p class="testimonial-card__credential">Behavior Analyst</p>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-card__quote-mark">"</div>
+        <p class="testimonial-card__text">Veronica is a powerhouse for this community. She is very considerate, consistent, and compassionate. I truly wish Therapy Colab existed when I started NBBS. It would have been a great way to collaborate and not feel like I had to do it all on my own. The office space offers safety, hygiene, and materials for check out. All ideal for sessions as a private practice owner. The alternatives of leasing out an executive office do not compare with what Therapy Colab offers.</p>
+        <div class="testimonial-card__divider"></div>
+        <div>
+          <p class="testimonial-card__name">Cierra Walling</p>
+          <p class="testimonial-card__credential">Owner, NBBS</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── 6. CTA ─────────────────────────────────────────────── -->
+<section class="about-cta" id="book-tour" aria-labelledby="about-cta-heading">
+  <div class="about-cta__inner">
+    <div>
+      <h2 id="about-cta-heading">Come See It for Yourself</h2>
+      <p class="about-cta__sub">The best way to understand Therapy Colab is to walk through it</p>
+    </div>
+    <div class="btn-group">
+      <a href="https://app.acuityscheduling.com/schedule.php?owner=39277070" target="_blank" rel="noopener" class="btn btn-primary">Book a Tour</a>
+      <a href="contact.html" class="btn btn-white">Get in Touch</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ── FOOTER ─────────────────────────────────────────────── -->
+<footer class="page-footer" role="contentinfo">
+  <div class="page-footer__inner">
+    <a href="index.html" class="page-footer__brand" aria-label="Therapy Colab — home">
+      <img class="page-footer__logo-icon" src="assets/logo-icon.svg" alt="Therapy Colab" />
+      <div class="page-footer__brand-text">
+        <span class="page-footer__wordmark">Therapy Colab</span>
+        <span class="page-footer__tagline">Collaborative Therapeutic Workspace</span>
+      </div>
+    </a>
+    <nav class="page-footer__nav" aria-label="Footer navigation">
+      <a href="memberships.html">Memberships</a>
+      <a href="how-it-works.html">How It Works</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="privacy-policy.html">Privacy Policy</a>
+    </nav>
+  </div>
+  <div class="page-footer__rule"></div>
+  <div class="page-footer__bottom">
+    <p class="page-footer__copy">&copy; <span id="footer-year">2026</span> Therapy Colab. All rights reserved.</p>
+    <div class="page-footer__social">
+      <a href="https://www.facebook.com/therapycolab" target="_blank" rel="noopener" aria-label="Therapy Colab on Facebook">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07c0 6.03 4.39 11.03 10.13 11.93v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.69.24 2.69.24v2.97h-1.52c-1.49 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8v8.44C19.61 23.1 24 18.1 24 12.07z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/therapycolab" target="_blank" rel="noopener" aria-label="Therapy Colab on Instagram">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07zM12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.31-1.46.72-2.13 1.38C1.35 2.68.94 3.35.63 4.14.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.31.79.72 1.46 1.38 2.13.67.66 1.34 1.07 2.13 1.38.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56.79-.31 1.46-.72 2.13-1.38.66-.67 1.07-1.34 1.38-2.13.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91-.31-.79-.72-1.46-1.38-2.13-.67-.66-1.34-1.07-2.13-1.38-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0z"/><path d="M12 5.84A6.16 6.16 0 1 0 18.16 12 6.16 6.16 0 0 0 12 5.84zM12 16a4 4 0 1 1 4-4 4 4 0 0 1-4 4z"/><circle cx="18.41" cy="5.59" r="1.44"/></svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ── Footer year ──
+  var fy = document.getElementById('footer-year');
+  if (fy) fy.textContent = new Date().getFullYear();
+
+  // ── Hamburger ──
+  var toggle = document.getElementById('nav-toggle');
+  var navLinks = document.getElementById('nav-links');
+  if (toggle && navLinks) {
+    toggle.addEventListener('click', function() {
+      var open = navLinks.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    document.addEventListener('click', function(e) {
+      if (!toggle.contains(e.target) && !navLinks.contains(e.target)) {
+        navLinks.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
+  // ── Custom cursor ──
+  var ring = document.getElementById('cursor-ring');
+  var dot  = document.getElementById('cursor-dot');
+  if (ring && dot) {
+    var mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', function(e) {
+      mx = e.clientX; my = e.clientY;
+      dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+    });
+    (function tick() {
+      rx += (mx - rx) * 0.14; ry += (my - ry) * 0.14;
+      ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+      requestAnimationFrame(tick);
+    })();
+    document.querySelectorAll('a, button, .testimonial-card').forEach(function(el) {
+      el.addEventListener('mouseenter', function() { document.body.classList.add('hovering'); });
+      el.addEventListener('mouseleave', function() { document.body.classList.remove('hovering'); });
+    });
+    document.addEventListener('mousedown', function() { document.body.classList.add('clicking'); });
+    document.addEventListener('mouseup',   function() { document.body.classList.remove('clicking'); });
+  }
+
+  // ── Founder bio "Read more" toggle (progressive enhancement) ──
+  var bioToggle = document.querySelector('.team__bio-toggle');
+  if (bioToggle) {
+    var bioWrap = document.getElementById(bioToggle.getAttribute('aria-controls'));
+    bioWrap.classList.add('is-collapsed');   // collapse only when JS is available
+    bioToggle.hidden = false;                // reveal the toggle
+    bioToggle.addEventListener('click', function() {
+      var collapsed = bioWrap.classList.toggle('is-collapsed');
+      bioToggle.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+      bioToggle.textContent = collapsed ? 'Read more' : 'Read less';
+    });
+  }
+
+  // ── Stats count-up on scroll ──
+  // Progressive enhancement: the real numbers are in the HTML; we only reset to
+  // 0 and animate when we can (motion allowed + APIs present). Otherwise untouched.
+  (function () {
+    var nums = document.querySelectorAll('.stat__number');
+    if (!nums.length) return;
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var willAnimate = !reduce && 'IntersectionObserver' in window && 'requestAnimationFrame' in window;
+    if (!willAnimate) return;
+
+    nums.forEach(function (el) {
+      var m = el.textContent.trim().match(/^(\D*)(\d[\d,]*)(\D*)$/); // prefix, digits, suffix
+      if (!m) return;
+      el.dataset.prefix = m[1];
+      el.dataset.target = m[2].replace(/,/g, '');
+      el.dataset.suffix = m[3];
+      el.textContent = m[1] + '0' + m[3];
+      el.dataset.pending = '1';
+    });
+
+    function animate(el) {
+      var target = parseInt(el.dataset.target, 10);
+      var prefix = el.dataset.prefix || '', suffix = el.dataset.suffix || '';
+      var dur = 1100, start = null;
+      function step(ts) {
+        if (start === null) start = ts;
+        var p = Math.min((ts - start) / dur, 1);
+        var eased = 1 - Math.pow(1 - p, 3); // easeOutCubic
+        el.textContent = prefix + Math.round(eased * target) + suffix;
+        if (p < 1) requestAnimationFrame(step);
+        else el.textContent = prefix + target + suffix;
+      }
+      requestAnimationFrame(step);
+    }
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting && e.target.dataset.pending) {
+          delete e.target.dataset.pending;
+          io.unobserve(e.target);
+          animate(e.target);
+        }
+      });
+    }, { threshold: 0.4 });
+    nums.forEach(function (el) { if (el.dataset.pending) io.observe(el); });
+  })();
+</script>
+
+</body>
+</html>

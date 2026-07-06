@@ -1,0 +1,15 @@
+# ── Private dev working files (local only, do not commit) ──
+TODO.md
+_notes/
+*.local.md
+
+# Claude CLI context and settings (local only)
+CLAUDE.md
+.claude/
+
+# ── OS / editor ──
+.DS_Store
+Thumbs.db
+.vscode/settings.json
+*.swp
+*.swo

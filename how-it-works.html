@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How It Works — Therapy Colab</title>
+  <meta name="description" content="Four simple steps to get started at Therapy Colab. Book a tour, apply for membership, select your hours, and start scheduling your practice space." />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/logo-icon.svg" />
+  <link rel="shortcut icon" href="assets/logo-icon.svg" />
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <style>
+    /* Match body bg to footer so no beige bleed after footer */
+    body { background: #251F1A; }
+
+    /* ── HERO ── */
+    .page-hero {
+      padding: 48px 24px;
+      background: var(--dark);
+      text-align: center;
+    }
+    .page-hero__inner { max-width: 600px; margin: 0 auto; }
+    .page-hero .eyebrow { color: var(--orange); }
+    .page-hero h1 { color: var(--white); margin-bottom: 12px; }
+    .page-hero__sub {
+      font-size: 1rem; font-weight: 300;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.7; margin: 0;
+    }
+
+    /* ── STEPS ── */
+    .steps-section {
+      padding: var(--section-py) 5%;
+      background: #ffffff;
+      position: relative;
+      overflow: hidden;
+    }
+    .steps-section__bg {
+      position: absolute; inset: 0;
+      background: url('assets/hero.jpg') center/cover no-repeat;
+      opacity: 0.05;
+      pointer-events: none;
+    }
+    .steps-section__placeholder-tag {
+      position: absolute;
+      bottom: 10px; right: 16px;
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+      color: rgba(48,44,39,0.3);
+      text-transform: uppercase;
+    }
+    .steps-inner { position: relative; z-index: 1; }
+    .steps-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+
+    /* Horizontal 4-col layout */
+    .steps-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0 32px;
+      align-items: start;
+    }
+
+    .step {
+      position: relative;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Arrow connector via pseudo-element */
+    .step:not(:last-child)::after {
+      content: '→';
+      position: absolute;
+      right: -22px;
+      top: 20px;
+      color: var(--border);
+      font-size: 1rem;
+      pointer-events: none;
+    }
+
+    .step__num {
+      font-family: var(--font-serif);
+      font-size: 4.5rem;
+      font-weight: 400;
+      color: rgba(92,159,153,0.28);
+      line-height: 1;
+      margin-bottom: 4px;
+      letter-spacing: -0.02em;
+    }
+
+    .step__rule {
+      display: block;
+      width: 32px; height: 2px;
+      background: var(--sage);
+      margin-bottom: 16px;
+      border: none;
+    }
+
+    .step__title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.15rem, 1.5vw, 1.35rem);
+      color: var(--text);
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+
+    .step__body {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.8;
+      font-weight: 300;
+      margin-bottom: 0;
+      flex: 1;
+    }
+
+    .step__link {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--sage);
+      text-decoration: none;
+      transition: color var(--transition);
+      margin-top: 20px;
+    }
+    .step__link:hover { color: var(--sage-dk); }
+
+    /* ── CTA ── */
+    .page-cta {
+      padding: 52px 5%;
+      background: #302C27;
+    }
+    .page-cta__inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .page-cta h2 {
+      color: var(--white);
+      font-size: clamp(1.5rem, 2.5vw, 2rem);
+      margin: 0;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .steps-row { grid-template-columns: 1fr 1fr; gap: 40px 32px; }
+      .step::after { display: none; }
+    }
+    @media (max-width: 600px) {
+      .steps-row { grid-template-columns: 1fr; gap: 36px; }
+      .step__num { font-size: 3rem; }
+      .page-cta__inner { flex-direction: column; align-items: flex-start; }
+      .page-cta .btn { width: 100%; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Custom cursor -->
+<div id="cursor-ring"></div>
+<div id="cursor-dot"></div>
+
+<!-- ── NAV ─────────────────────────────────────────────────── -->
+<header class="wf-nav" role="banner">
+  <div class="wf-nav__inner">
+    <a href="index.html" class="wf-nav__brand" aria-label="Therapy Colab — home">
+      <img class="wf-nav__logo-icon" src="assets/logo-icon.svg" alt="Therapy Colab icon" width="40" height="40" />
+      <div class="wf-nav__brand-text">
+        <span class="wf-nav__wordmark">Therapy Colab</span>
+        <span class="wf-nav__tagline">Collaborative Therapeutic Workspace</span>
+      </div>
+    </a>
+    <nav class="wf-nav__links" id="nav-links" aria-label="Primary navigation">
+      <a href="index.html">Home</a>
+      <a href="memberships.html">Memberships</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <div class="wf-nav__mobile-cta"><a href="https://app.acuityscheduling.com/schedule.php?owner=39277070" target="_blank" rel="noopener" class="btn btn-primary" style="display:block;text-align:center;">Book a Tour</a></div>
+    </nav>
+    <div class="wf-nav__cta">
+      <a href="https://app.acuityscheduling.com/schedule.php?owner=39277070" target="_blank" rel="noopener" class="btn btn-primary">Book a Tour</a>
+    </div>
+    <button class="wf-nav__hamburger" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+<!-- ── HERO ─────────────────────────────────────────────────── -->
+<section class="page-hero" aria-labelledby="hero-heading">
+  <div class="page-hero__inner">
+    <span class="eyebrow">The Process</span>
+    <h1 id="hero-heading">Getting Started is Simple</h1>
+    <p class="page-hero__sub">Four steps from first look to fully scheduled practice space.</p>
+  </div>
+</section>
+
+<!-- ── STEPS ─────────────────────────────────────────────────── -->
+<section class="steps-section" aria-labelledby="steps-heading">
+  <div class="steps-section__bg" aria-hidden="true"></div>
+  <span class="steps-section__placeholder-tag">[ Placeholder — background image, room photography coming soon ]</span>
+  <div class="steps-inner">
+
+    <div class="steps-row" role="list">
+
+      <!-- Step 01 -->
+      <div class="step" role="listitem">
+        <p class="step__num" aria-hidden="true">01</p>
+        <span class="step__rule" aria-hidden="true"></span>
+        <h3 class="step__title">Book a Tour</h3>
+        <p class="step__body">Come see the space in person. Get a feel for the rooms and environment before you commit to anything.</p>
+        <a href="https://app.acuityscheduling.com/schedule.php?owner=39277070" target="_blank" rel="noopener" class="step__link">Book now →</a>
+      </div>
+
+      <!-- Step 02 -->
+      <div class="step" role="listitem">
+        <p class="step__num" aria-hidden="true">02</p>
+        <span class="step__rule" aria-hidden="true"></span>
+        <h3 class="step__title">Apply for Membership</h3>
+        <p class="step__body">Submit a short application. We review each provider to ensure a great fit for the community.</p>
+        <a href="contact.html" class="step__link">Apply →</a>
+      </div>
+
+      <!-- Step 03 -->
+      <div class="step" role="listitem">
+        <p class="step__num" aria-hidden="true">03</p>
+        <span class="step__rule" aria-hidden="true"></span>
+        <h3 class="step__title">Select Monthly Hours</h3>
+        <p class="step__body">Choose the membership tier that matches your practice volume. Upgrade any time as you grow.</p>
+        <a href="memberships.html" class="step__link">View plans →</a>
+      </div>
+
+      <!-- Step 04 -->
+      <div class="step" role="listitem">
+        <p class="step__num" aria-hidden="true">04</p>
+        <span class="step__rule" aria-hidden="true"></span>
+        <h3 class="step__title">Start Scheduling</h3>
+        <p class="step__body">Book your hours through our online scheduling, and we'll confirm your reservation. Priority scheduling available on select tiers.</p>
+        <a href="https://app.acuityscheduling.com/schedule.php?owner=39277070" target="_blank" rel="noopener" class="step__link">Get started →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ──────────────────────────────────────────────────── -->
+<section class="page-cta" id="book-tour" aria-labelledby="cta-heading">
+  <div class="page-cta__inner">
+    <h2 id="cta-heading">Ready to See the Space?</h2>
+    <a href="https://app.acuityscheduling.com/schedule.php?owner=39277070" target="_blank" rel="noopener" class="btn btn-primary">Book a Tour</a>
+  </div>
+</section>
+
+</main>
+
+<!-- ── FOOTER ───────────────────────────────────────────────── -->
+<footer class="page-footer" role="contentinfo">
+  <div class="page-footer__inner">
+    <a href="index.html" class="page-footer__brand" aria-label="Therapy Colab — home">
+      <img class="page-footer__logo-icon" src="assets/logo-icon.svg" alt="Therapy Colab" />
+      <div class="page-footer__brand-text">
+        <span class="page-footer__wordmark">Therapy Colab</span>
+        <span class="page-footer__tagline">Collaborative Therapeutic Workspace</span>
+      </div>
+    </a>
+    <nav class="page-footer__nav" aria-label="Footer navigation">
+      <a href="memberships.html">Memberships</a>
+      <a href="how-it-works.html">How It Works</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="privacy-policy.html">Privacy Policy</a>
+    </nav>
+  </div>
+  <div class="page-footer__rule"></div>
+  <div class="page-footer__bottom">
+    <p class="page-footer__copy">&copy; <span id="footer-year">2026</span> Therapy Colab. All rights reserved.</p>
+    <div class="page-footer__social">
+      <a href="https://www.facebook.com/therapycolab" target="_blank" rel="noopener" aria-label="Therapy Colab on Facebook">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07c0 6.03 4.39 11.03 10.13 11.93v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.69.24 2.69.24v2.97h-1.52c-1.49 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8v8.44C19.61 23.1 24 18.1 24 12.07z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/therapycolab" target="_blank" rel="noopener" aria-label="Therapy Colab on Instagram">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07zM12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.31-1.46.72-2.13 1.38C1.35 2.68.94 3.35.63 4.14.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.31.79.72 1.46 1.38 2.13.67.66 1.34 1.07 2.13 1.38.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56.79-.31 1.46-.72 2.13-1.38.66-.67 1.07-1.34 1.38-2.13.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91-.31-.79-.72-1.46-1.38-2.13-.67-.66-1.34-1.07-2.13-1.38-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0z"/><path d="M12 5.84A6.16 6.16 0 1 0 18.16 12 6.16 6.16 0 0 0 12 5.84zM12 16a4 4 0 1 1 4-4 4 4 0 0 1-4 4z"/><circle cx="18.41" cy="5.59" r="1.44"/></svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  var fy = document.getElementById('footer-year');
+  if (fy) fy.textContent = new Date().getFullYear();
+
+  var toggle = document.getElementById('nav-toggle');
+  var links  = document.getElementById('nav-links');
+  if (toggle && links) {
+    toggle.addEventListener('click', function() {
+      var open = links.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    document.addEventListener('click', function(e) {
+      if (!toggle.contains(e.target) && !links.contains(e.target)) {
+        links.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
+  var ring = document.getElementById('cursor-ring');
+  var dot  = document.getElementById('cursor-dot');
+  if (ring && dot) {
+    var mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', function(e) {
+      mx = e.clientX; my = e.clientY;
+      dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+    });
+    (function tick() {
+      rx += (mx - rx) * 0.14; ry += (my - ry) * 0.14;
+      ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+      requestAnimationFrame(tick);
+    })();
+    document.querySelectorAll('a, button').forEach(function(el) {
+      el.addEventListener('mouseenter', function() { document.body.classList.add('hovering'); });
+      el.addEventListener('mouseleave', function() { document.body.classList.remove('hovering'); });
+    });
+    document.addEventListener('mousedown', function() { document.body.classList.add('clicking'); });
+    document.addEventListener('mouseup',   function() { document.body.classList.remove('clicking'); });
+  }
+</script>
+
+</body>
+</html>
