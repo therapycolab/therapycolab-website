@@ -56,10 +56,10 @@ Everything below still needs real content before or at launch.
 | Background (how-it-works) | `how-it-works.html` steps section | `hero.jpg` at 5% opacity — placeholder label in bottom-right corner |
 | Founder headshot | `about.html` team carousel, slide 1 | **Real headshot received** — `vsmith Headshot.png` in client assets folder. Needs copying to `assets/` and updating src. |
 | Founder bio | `about.html` team carousel | **Real bio received** — update carousel card text + add pull quote |
-| Testimonials (×3) | `about.html` testimonials grid | Placeholder names: Sarah M. (LCSW), Marcus T. (BCBA), Priya K. (OT). **First real quote received:** Adam Volker, EdD, BCBA, LBA. More coming. Remove all 3 placeholders and replace with real quotes. |
-| Mailchimp embed | `index.html` waitlist section | **Embed code received** — `05 - Client Assets/Veronica Provided/Mailchimp Embed Code (Therapy Colab Waitlist).txt`. Wire up and style to match site. |
+| Testimonials (×3) | `about.html` testimonials grid | 3 testimonials received |
+| Mailchimp embed | `index.html` waitlist section | **Embed code received** — Wire up and style to match site. |
 | Acuity booking link | All 5 pages (`#book-tour` hrefs) | **Link received** — `https://app.acuityscheduling.com/schedule.php?owner=39277070`. Swap all `href="#book-tour"` occurrences. |
-| Privacy Policy content | `privacy-policy.html` | With Veronica's attorney. Skeleton page is live — replace content when received. |
+| Privacy Policy content | `privacy-policy.html` | |
 | Story photo | `about.html` story section | Unsplash `photo-1497366216548` — may remain until room photography arrives |
 
 ### Placeholder labels in HTML
@@ -96,13 +96,3 @@ Below the 4 cards: "Need more than 60 hours, or scheduling for a larger team? Le
 ## Memberships Carousel (Our Spaces)
 
 Located in `memberships.html`. Auto-advances every 5 seconds, pauses on hover. No external library — custom JS in the page. Prev/next buttons + dot indicators. If adding rooms: add a new `.space-card` slide and update the dot count in the JS.
-
----
-
-## Pending Round 2 Edits (from Veronica, June 7)
-
-- [ ] Add BCBAs/ABA providers to home page hero + "Who It's For" section
-- [ ] Fix contact email sitewide → `admin@therapycolab.com`
-- [ ] Unify "Apply for Membership" links → all to `contact.html`
-- [ ] Soften "member portal" / self-scheduling language → Acuity + manual approval
-- [ ] Remove placeholder testimonials from `about.html`
