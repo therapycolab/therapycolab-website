@@ -7,7 +7,7 @@
   to = "/404.html"
   status = 404
 
-# Block markdown files at root (readme.md etc.) from being web-served
+# Block markdown files at root (CLAUDE.md etc.) from being web-served
 [[redirects]]
   from = "/*.md"
   to = "/404.html"
