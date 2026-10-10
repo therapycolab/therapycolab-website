@@ -108,7 +108,7 @@ The `privacy-policy.html` page has a skeleton structure. When Veronica's attorne
 
 **Contact:**
 - Email: `admin@therapycolab.com`
-- Phone: `(702) 901-9335`
+- Phone: `(702) 443-2584`
 - Address: 7560 W. Sahara Ave Suite 101, Las Vegas NV 89117
 
 ---
